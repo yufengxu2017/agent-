@@ -2,10 +2,13 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Status](https://img.shields.io/badge/status-WIP%20%C2%B7%20Phase%201-orange)](#phase-1-current-state)
+[![Lang](https://img.shields.io/badge/lang-English-blue)](README.en.md) [![繁中](https://img.shields.io/badge/語言-繁體中文-red)](README.md)
 
-> A learning roadmap for agentic AI — from your first LLM API call to shipping multi-agent production systems. **Structured as a 7-stage path, not a flat list**, with curated projects, hello-world demos, and required reading at every stage.
->
-> Written in English. The Chinese-language resources currently cited are **zh-CN** (Datawhale, jjyaoao, KimYx0207). A native **zh-TW (Traditional Chinese)** companion translation is Phase 2 work.
+> **English companion to the [繁體中文 canonical README](README.md).**
+
+A learning roadmap for agentic AI — from your first LLM API call to shipping multi-agent production systems. **Structured as a 7-stage path, not a flat list**, with curated projects, hello-world demos, and required reading at every stage.
+
+> Stage detail pages (00-07) and branch files are currently in English; full zh-TW translation is Phase 2 work.
 
 ---
 
