@@ -116,6 +116,8 @@ Stage 7  Multi-Agent · Production (orchestration · eval · deploy · SDK) 2-4 
 - [**travisvn/awesome-claude-skills**](https://github.com/travisvn/awesome-claude-skills) — Claude Skills catalog
 - [**modelcontextprotocol/servers**](https://github.com/modelcontextprotocol/servers) — 官方 MCP reference servers
 - [**datawhalechina/hello-agents**](https://github.com/datawhalechina/hello-agents) — Datawhale 中文教程（zh-CN）
+- [**WangRongsheng/awesome-LLM-resources**](https://github.com/WangRongsheng/awesome-LLM-resources) — 全世界最好的 LLM 資料總結（中文整理、8k+ stars）
+- [**HqWu-HITCS/Awesome-Chinese-LLM**](https://github.com/HqWu-HITCS/Awesome-Chinese-LLM) — 中文開源大模型整理（22k+ stars）
 
 ---
 

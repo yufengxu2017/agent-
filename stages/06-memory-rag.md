@@ -129,6 +129,24 @@ results = collection.query(query_texts=["query"], n_results=1)
 
 ---
 
+### [chatchat-space/Langchain-Chatchat](https://github.com/chatchat-space/Langchain-Chatchat)
+
+| Field | Value |
+|---|---|
+| Maintainer | chatchat-space |
+| Language | 中文 + Python |
+| Stars | ★ 38k+ |
+| License | Apache-2.0 |
+| Recommendation | ⭐⭐⭐⭐ |
+
+**What it teaches**: 中文社群最廣泛使用的 RAG + Agent 應用框架。Offline-deployable knowledge base Q&A with Chinese-friendly defaults. Supports ChatGLM / Qwen / Llama / Ollama backends.
+
+**Best for**: Chinese-speaking learners building knowledge base / RAG apps. The defaults handle Chinese tokenization + embeddings well.
+
+**Notes**: Last update Nov 2025 (~6 months — borderline on the active-maintenance criterion).
+
+---
+
 ### [Anthropic — Contextual Retrieval cookbook](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide)
 
 **What it teaches**: Anthropic's contextual retrieval technique with prompt caching, end-to-end example.

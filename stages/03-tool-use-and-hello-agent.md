@@ -117,6 +117,22 @@ jupyter notebook customer_service_agent.ipynb
 
 ---
 
+### [lsdefine/GenericAgent](https://github.com/lsdefine/GenericAgent)
+
+| Field | Value |
+|---|---|
+| Maintainer | lsdefine |
+| Language | 中文 + Python |
+| Stars | ★ 9k+ |
+| License | MIT |
+| Recommendation | ⭐⭐⭐⭐ |
+
+**What it teaches**: Minimal self-evolving agent framework — core ~3K lines of code, agent grows skill tree from a seed. Supports Claude / Gemini / Kimi / MiniMax. Active development.
+
+**Best for**: Hello-3 / Hello-4 alternative for readers who want a more "minimal but full" framework reference. Good middle ground between mattambrogi's toy and full LangGraph.
+
+---
+
 ### [HelloAgents (jjyaoao)](https://github.com/jjyaoao/HelloAgents) — `learn_version` branch
 
 | Field | Value |

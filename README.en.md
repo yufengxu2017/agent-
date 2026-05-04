@@ -116,6 +116,8 @@ This repo doesn't try to replace flat awesome lists. Use them when you already k
 - [**travisvn/awesome-claude-skills**](https://github.com/travisvn/awesome-claude-skills) — Claude Skills catalog
 - [**modelcontextprotocol/servers**](https://github.com/modelcontextprotocol/servers) — official MCP reference servers
 - [**datawhalechina/hello-agents**](https://github.com/datawhalechina/hello-agents) — Datawhale Chinese tutorial (zh-CN)
+- [**WangRongsheng/awesome-LLM-resources**](https://github.com/WangRongsheng/awesome-LLM-resources) — comprehensive zh-CN LLM resources catalog (8k+ stars)
+- [**HqWu-HITCS/Awesome-Chinese-LLM**](https://github.com/HqWu-HITCS/Awesome-Chinese-LLM) — open-source Chinese LLM catalog (22k+ stars)
 
 ---
 

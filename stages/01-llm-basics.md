@@ -112,6 +112,54 @@ jupyter notebook guide.ipynb
 
 ---
 
+### [datawhalechina/happy-llm](https://github.com/datawhalechina/happy-llm)
+
+| Field | Value |
+|---|---|
+| Maintainer | datawhalechina |
+| Language | 中文 (zh-CN) |
+| Stars | ★ 29k+ |
+| License | Custom |
+| Recommendation | ⭐⭐⭐⭐⭐ |
+
+**What it teaches**: Build LLM from scratch — Chinese-language equivalent of Karpathy's "Zero to Hero" course. Chapters 1-4 cover LLM principles bottom-up, then practical applications.
+
+**Best for**: Chinese-speaking learners who want to truly understand how LLMs work, not just call APIs. Direct counterpart to Hugging Face's LLM Course but in Chinese.
+
+---
+
+### [datawhalechina/llm-universe](https://github.com/datawhalechina/llm-universe)
+
+| Field | Value |
+|---|---|
+| Maintainer | datawhalechina |
+| Language | 中文 (zh-CN) |
+| Stars | ★ 12k+ |
+| License | NOASSERTION |
+| Recommendation | ⭐⭐⭐⭐ |
+
+**What it teaches**: 面向小白開發者的大模型應用開發教程 — beginner-friendly LLM application development. Covers API basics, knowledge bases, RAG, advanced techniques.
+
+**Best for**: Chinese-speaking beginners who want to *build something* with LLM (vs. just understand them).
+
+---
+
+### [jingyaogong/minimind](https://github.com/jingyaogong/minimind)
+
+| Field | Value |
+|---|---|
+| Maintainer | jingyaogong |
+| Language | 中文 + Python |
+| Stars | ★ 48k+ |
+| License | Apache-2.0 |
+| Recommendation | ⭐⭐⭐⭐⭐ |
+
+**What it teaches**: 2 小時從零訓練 64M 參數 LLM — the most popular Chinese hands-on "build LLM from scratch" project. Pretrain + SFT + LoRA + DPO + RLHF all in one repo.
+
+**Best for**: After watching Karpathy's video, run this to actually feel each training stage on real data. The pedagogical value is exceptional.
+
+---
+
 ### [datawhalechina/llm-cookbook](https://github.com/datawhalechina/llm-cookbook)
 
 | Field | Value |

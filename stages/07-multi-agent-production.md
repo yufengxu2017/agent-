@@ -204,7 +204,23 @@ Already cited. Specifically the `prompt_caching.ipynb`, `tool_use/`, and `multim
 
 ---
 
-#### [vLLM](https://github.com/vllm-project/vllm)
+#### [datawhalechina/self-llm](https://github.com/datawhalechina/self-llm)
+
+| Field | Value |
+|---|---|
+| Maintainer | datawhalechina |
+| Language | 中文 (zh-CN) |
+| Stars | ★ 30k+ |
+| License | Apache-2.0 |
+| Recommendation | ⭐⭐⭐⭐ |
+
+**What it teaches**: 開源大模型食用指南 — comprehensive Chinese-language guide for fine-tuning and deploying open-source LLMs in Linux environments. Covers Qwen / Llama / GLM / multimodal models, full-parameter + LoRA + deployment.
+
+**Best for**: Chinese-speaking teams self-hosting open-source LLMs. Production-grade Chinese tutorial for the entire training-to-deployment cycle.
+
+---
+
+### [vLLM](https://github.com/vllm-project/vllm)
 
 | Stars | ★ 79k+ |
 |---|---|
