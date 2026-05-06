@@ -253,6 +253,23 @@ Already cited. Specifically the `prompt_caching.ipynb`, `tool_use/`, and `multim
 
 ---
 
+#### [hiyouga/LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)
+
+| Field | Value |
+|---|---|
+| Language | Python |
+| Stars | ★ 70k+ |
+| License | Apache-2.0 |
+| Recommendation | ⭐⭐⭐⭐⭐ |
+
+**What it teaches**: The most widely used LLM fine-tuning framework in the Chinese community — unifies SFT / DPO / PPO / GRPO training across 100+ open-source models (Llama / Qwen / DeepSeek / Yi / Mistral, etc.). Web UI lets you fine-tune without writing code.
+
+**Best for**: Anyone fine-tuning open-source LLMs (not just prompt engineering). More focused on training itself than self-llm's broader scope.
+
+**Notes**: Combined with Stage 1's Ollama / llama.cpp, you get a complete "fine-tune → quantize → local deploy" loop.
+
+---
+
 ### [vLLM](https://github.com/vllm-project/vllm)
 
 | Field | Value |

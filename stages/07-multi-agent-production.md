@@ -257,6 +257,23 @@ npx promptfoo eval
 
 ---
 
+#### [hiyouga/LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)
+
+| 欄位 | 內容 |
+|---|---|
+| 語言 | Python |
+| Stars | ★ 70k+ |
+| License | Apache-2.0 |
+| 推薦度 | ⭐⭐⭐⭐⭐ |
+
+**教什麼**：中文社群最廣泛使用的 LLM fine-tuning framework——統一 100+ 個開源模型（Llama / Qwen / DeepSeek / Yi / Mistral 等）的 SFT、DPO、PPO、GRPO 訓練流程。Web UI 可以零程式碼跑 fine-tuning。
+
+**適合誰**：要 fine-tune 開源 LLM（不只是 prompt-engineering）的人。比 self-llm 範圍更聚焦在「訓練」本身。
+
+**備註**：搭配前面 Stage 1 的 Ollama / llama.cpp，能完整跑「fine-tune → quantize → 本地 deploy」的閉環。
+
+---
+
 ### [vLLM](https://github.com/vllm-project/vllm)
 
 | 欄位 | 內容 |

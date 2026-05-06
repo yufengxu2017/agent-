@@ -60,6 +60,25 @@ Trigger error conditions deliberately and write retry logic:
 - Network drop → write a retry wrapper with exponential backoff
 This is foundational for Stage 3-7's production agent code.
 
+### Hello, Local LLM
+**No API fees, runs on your machine**: use Ollama to pull a small model (recommend `llama3.2:3b` or `qwen2.5:3b`), call it via OpenAI-compatible API.
+```bash
+# Install Ollama: https://ollama.com
+ollama pull qwen2.5:3b
+ollama serve  # default port 11434
+```
+Then from Python:
+```python
+from openai import OpenAI
+client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+r = client.chat.completions.create(
+    model="qwen2.5:3b",
+    messages=[{"role":"user","content":"Explain ReAct in 3 sentences"}]
+)
+print(r.choices[0].message.content)
+```
+**Why do this**: once you can run local LLMs, Stage 3-6 experiments aren't bottlenecked on API costs; privacy-sensitive work also stays offline.
+
 ## 🎯 Curated Projects
 
 ### [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
@@ -210,6 +229,82 @@ jupyter notebook guide.ipynb
 **What it teaches**: How LLMs actually work (tokenization, transformers, fine-tuning) with Hugging Face ecosystem.
 
 **Best for**: Readers who want to understand what's happening inside, not just the API surface.
+
+---
+
+### 🖥️ Running LLMs Locally (no API fees)
+
+The four entries below are tools to **run LLMs on your own machine** — useful after Hello-Local-LLM, and the answer for privacy-sensitive work, cost-sensitive experiments, or offline scenarios.
+
+---
+
+### [ollama/ollama](https://github.com/ollama/ollama)
+
+| Field | Value |
+|---|---|
+| Language | Go |
+| Stars | ★ 170k+ |
+| License | MIT |
+| Recommendation | ⭐⭐⭐⭐⭐ |
+
+**What it teaches**: The easiest local LLM runner — one `ollama pull qwen2.5:3b` and you have a working model with built-in OpenAI-compatible API (`http://localhost:11434/v1`); existing OpenAI SDK code barely needs to change.
+
+**Best for**: First-time local LLM users. Also useful as fallback in agent dev — main path on Claude, cost-sensitive parts on Ollama.
+
+**Run it**:
+```bash
+# Download from https://ollama.com
+ollama pull qwen2.5:3b   # ~2GB, decent Chinese support
+ollama run qwen2.5:3b    # interactive chat
+ollama serve             # start API server
+```
+
+---
+
+### [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp)
+
+| Field | Value |
+|---|---|
+| Language | C++ |
+| Stars | ★ 108k+ |
+| License | MIT |
+| Recommendation | ⭐⭐⭐⭐ |
+
+**What it teaches**: The inference engine that Ollama and many local LLM tools use under the hood. Understand quantization (GGUF format, what Q4_K_M / Q5_K_S mean), KV cache, CPU/GPU offloading.
+
+**Best for**: People who want to know "why can a 7B model fit in 8GB RAM?" If Ollama is enough for you, skip; come back when you need fine-grained control.
+
+---
+
+### [mudler/LocalAI](https://github.com/mudler/LocalAI)
+
+| Field | Value |
+|---|---|
+| Language | Go |
+| Stars | ★ 46k+ |
+| License | MIT |
+| Recommendation | ⭐⭐⭐⭐ |
+
+**What it teaches**: Drop-in OpenAI API replacement — same OpenAI SDK code, point `base_url` at LocalAI, and run LLM, embedding, image generation, TTS, STT all locally.
+
+**Best for**: Teams with compliance / data-privacy requirements that need to replace the entire OpenAI stack with local alternatives. Broader scope than Ollama (not just chat).
+
+---
+
+### [ml-explore/mlx](https://github.com/ml-explore/mlx)
+
+| Field | Value |
+|---|---|
+| Language | C++ / Python |
+| Stars | ★ 25k+ |
+| License | MIT |
+| Recommendation | ⭐⭐⭐ |
+
+**What it teaches**: Apple's ML framework purpose-built for Apple Silicon (M1/M2/M3/M4 chips). On Macs, often faster than llama.cpp with better memory efficiency.
+
+**Best for**: Mac developers wanting to squeeze maximum performance from Apple Silicon. Linux / Windows users can skip.
+
+**Notes**: Pair it with the `mlx-lm` package for the easiest path.
 
 **Notes**: More academic than cookbooks. Covers training, not just inference.
 

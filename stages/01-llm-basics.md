@@ -62,6 +62,25 @@ print(msg.content[0].text)
 - 網路斷掉 → 寫一個有 exponential backoff 的 retry wrapper
 這是後面 Stage 3-7 寫 production agent 一定會用到的基礎。
 
+### Hello, Local LLM
+**不付 API 費用、跑在自己電腦上**：用 Ollama 下載一個小模型（建議 `llama3.2:3b` 或 `qwen2.5:3b`），用 OpenAI-相容 API 呼叫它。
+```bash
+# 裝 Ollama: https://ollama.com
+ollama pull qwen2.5:3b
+ollama serve  # 預設 port 11434
+```
+然後從 Python：
+```python
+from openai import OpenAI
+client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+r = client.chat.completions.create(
+    model="qwen2.5:3b",
+    messages=[{"role":"user","content":"用 3 句話介紹什麼是 ReAct"}]
+)
+print(r.choices[0].message.content)
+```
+**為什麼要做**：學會跑本地 LLM 後，後面 Stage 3-6 的實驗都不會被 API 費用卡住；隱私敏感場景也能 offline。
+
 ## 🎯 精選 Projects
 
 ### [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
@@ -212,6 +231,82 @@ jupyter notebook guide.ipynb
 **教什麼**：LLM 內部到底怎麼運作（tokenization、transformer、fine-tuning），搭配 Hugging Face 生態系。
 
 **適合誰**：想搞懂內部機制、不只想看 API 表面的讀者。
+
+---
+
+### 🖥️ 本地端執行 LLM（不用付 API 費用）
+
+下面 4 個是「**把 LLM 跑在自己電腦上**」的工具——適合 Hello-Local-LLM 之後想深入的人，也是隱私敏感、API 費用敏感、或要 offline 工作場景的解法。
+
+---
+
+### [ollama/ollama](https://github.com/ollama/ollama)
+
+| 欄位 | 內容 |
+|---|---|
+| 語言 | Go |
+| Stars | ★ 170k+ |
+| License | MIT |
+| 推薦度 | ⭐⭐⭐⭐⭐ |
+
+**教什麼**：最容易上手的本地 LLM runner——一行 `ollama pull qwen2.5:3b` 就有一個能跑的模型，內建 OpenAI-相容 API（`http://localhost:11434/v1`），既有的 OpenAI SDK 程式碼幾乎不用改。
+
+**適合誰**：第一次跑本地 LLM 的人。也適合在 agent 開發時當 fallback——主流程接 Claude，砍成本的部分接 Ollama。
+
+**怎麼跑**：
+```bash
+# https://ollama.com 下載安裝
+ollama pull qwen2.5:3b   # 中文友善的小模型，約 2GB
+ollama run qwen2.5:3b    # 互動 chat
+ollama serve             # 啟動 API server
+```
+
+---
+
+### [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp)
+
+| 欄位 | 內容 |
+|---|---|
+| 語言 | C++ |
+| Stars | ★ 108k+ |
+| License | MIT |
+| 推薦度 | ⭐⭐⭐⭐ |
+
+**教什麼**：Ollama 跟一堆本地 LLM 工具底層都在用的 inference engine。理解 quantization（GGUF 格式、Q4_K_M / Q5_K_S 各代表什麼）、KV cache、CPU/GPU offloading 怎麼運作。
+
+**適合誰**：想搞清楚「為什麼 7B 模型可以塞進 8GB RAM」的人。Ollama 用起來夠了的話，可以暫時不碰；要 fine-grained 控制就回來讀這個。
+
+---
+
+### [mudler/LocalAI](https://github.com/mudler/LocalAI)
+
+| 欄位 | 內容 |
+|---|---|
+| 語言 | Go |
+| Stars | ★ 46k+ |
+| License | MIT |
+| 推薦度 | ⭐⭐⭐⭐ |
+
+**教什麼**：drop-in 的 OpenAI API 替代品——同一份 OpenAI SDK 程式碼，把 base_url 改指到 LocalAI，就能在本地跑 LLM、embedding、image generation、TTS、STT。
+
+**適合誰**：團隊有合規 / 資料隱私要求，要把 OpenAI 全套服務改成本地的場景。比 Ollama 範圍更廣（不只 chat）。
+
+---
+
+### [ml-explore/mlx](https://github.com/ml-explore/mlx)
+
+| 欄位 | 內容 |
+|---|---|
+| 語言 | C++ / Python |
+| Stars | ★ 25k+ |
+| License | MIT |
+| 推薦度 | ⭐⭐⭐ |
+
+**教什麼**：Apple 為 Apple Silicon（M1/M2/M3/M4 晶片）量身打造的 ML framework。在 Mac 上跑本地 LLM 通常比 llama.cpp 還快，記憶體效率好。
+
+**適合誰**：用 MacBook 開發、想榨乾 Apple Silicon 性能的人。Linux / Windows 使用者可跳。
+
+**備註**：搭配 `mlx-lm` package 用最方便。
 
 **備註**：比 cookbook 學術一點。有講訓練，不只是 inference。
 

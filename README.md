@@ -6,12 +6,12 @@
 
 # awesome-agentic-ai-zh
 
-### 🤖 AI Agent 學習地圖 — 從第一行 LLM API 到自己打造多 agent 系統
+### 🤖 AI Agent 學習地圖 — 從基本 LLM 概念到自己打造多 agent 系統
 
-<p><em>結構化 7 階段學習路徑，不是平鋪 awesome list；每階段都有必跑 demo、必修閱讀、精選 project</em></p>
+<p><em>結構化 7 階段學習路徑，從「LLM 是什麼、token 怎麼算」一路到 multi-agent 編排、本地部署，<br/>每階段都有必跑 demo、必修閱讀、精選 project</em></p>
 
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat)](LICENSE)
-[![Status](https://img.shields.io/badge/status-Phase%206%20進行中%20%C2%B7%20134%20projects-success?style=flat)](#-現況phase-6-community)
+[![Status](https://img.shields.io/badge/status-Phase%206%20%C2%B7%20145%2B%20projects%20%C2%B7%205%20branches-success?style=flat)](CONTRIBUTORS.md)
 ![GitHub stars](https://img.shields.io/github/stars/WenyuChiou/awesome-agentic-ai-zh?style=flat&logo=github)
 ![GitHub forks](https://img.shields.io/github/forks/WenyuChiou/awesome-agentic-ai-zh?style=flat&logo=github)
 [![Lang](https://img.shields.io/badge/語言-繁體中文-red?style=flat)](README.md)
@@ -40,7 +40,6 @@
 - [🗺️ 7 階段學習地圖](#️-7-階段學習地圖)
 - [💡 如何學習](#-如何學習)
 - [📚 相關資源](#-相關資源)
-- [📍 現況：Phase 6 community](#-現況phase-6-community)
 - [🤝 如何貢獻](#-如何貢獻)
 - [🙏 致謝](#-致謝)
 - [🎓 引用](#-引用)
@@ -66,15 +65,20 @@ cd awesome-agentic-ai-zh
 - 📖 **完全免費** — MIT 授權，所有內容開放共學
 - 🗺️ **結構化路徑** — 7 階段、明確「我目前在哪、下一步學什麼」
 - 🛠️ **必跑 Hello-X demos** — 每階段都有 1-5 個必跑 mini project，光看不練不算學會
-- 🎯 **精選 134 個 projects** — 每個都附星等推薦、適合誰、教什麼、怎麼跑
+- 🎯 **精選 145+ 個 projects** — 每個都附星等推薦、適合誰、教什麼、怎麼跑（含本地 LLM 執行：Ollama、llama.cpp、LocalAI、MLX）
 - 🌏 **中文 / 英文雙語** — 繁中為主、英文版完整對照
 - 🎓 **不只「框架」、還有「Claude Code 生態」** — MCP / Skills / Plugins / SDK 完整堆疊
-- 🔬 **4 條進階分支** — 走完主幹後可選研究員 / 開發者 / 老師 / 知識工作者 path
+- 🔬 **5 條進階分支** — 研究員 / 開發者 / 老師 / 知識工作者 / **日常使用者** path
 - ⏱️ **誠實時程** — 主幹最少 14-19 週、現實 5-6 個月（每週 5-8 hr）
 
 ---
 
 ## 🗺️ 7 階段學習地圖
+
+![AI Agent 學習地圖](resources/diagrams/learning-map.png)
+
+<details>
+<summary>互動式版本（Mermaid，screen reader 友善）</summary>
 
 ```mermaid
 flowchart LR
@@ -89,6 +93,7 @@ flowchart LR
     S7 --> D["💻 開發者"]
     S7 --> T["🎓 教師"]
     S7 --> K["📊 知識工作者"]
+    S7 --> E["👥 日常使用者"]
 
     style S0 fill:#f3f4f6,stroke:#6b7280
     style S3 fill:#fef3c7,stroke:#b45309
@@ -97,7 +102,10 @@ flowchart LR
     style D fill:#dcfce7,stroke:#166534
     style T fill:#fce7f3,stroke:#9d174d
     style K fill:#f3e8ff,stroke:#6b21a8
+    style E fill:#fef9c3,stroke:#854d0e
 ```
+
+</details>
 
 | Stage | 主題 | 關鍵內容 | 時程 |
 |---|---|---|---|
@@ -114,21 +122,25 @@ flowchart LR
 
 > 💡 **想看跨 stage 完整範例？** [7 步打造你的第一個 AI Agent](walkthroughs/build-first-agent-in-7-steps.md) — 同一個 Paper Summary Bot 從 Stage 1 一路寫到 Stage 7，~350 行真實程式碼
 
-走完主幹後從 4 條 specialized branch 選一條繼續。**不確定走哪條？**
+走完主幹後從 5 條 specialized branch 選一條繼續。**不確定走哪條？**
 
 ```mermaid
 flowchart TD
-    Q1{你的主要工作是？}
+    Q1{你的主要工作 / 使用情境是？}
     Q1 -->|寫 paper / 文獻 / 跑實驗| R["🔬 研究人員<br/>for-researcher"]
     Q1 -->|寫 code / 維護 system| D["💻 開發者<br/>for-developer"]
     Q1 -->|備課 / 教學 / 評量| T["🎓 教師<br/>for-teacher"]
     Q1 -->|寫 report / 開會 / 分析| K["📊 知識工作者<br/>for-knowledge-worker"]
+    Q1 -->|不寫 code，日常生活用| E["👥 日常使用者<br/>for-everyday-users"]
 
     style R fill:#dbeafe,stroke:#1e40af
     style D fill:#dcfce7,stroke:#166534
     style T fill:#fce7f3,stroke:#9d174d
     style K fill:#f3e8ff,stroke:#6b21a8
+    style E fill:#fef9c3,stroke:#854d0e
 ```
+
+> 💡 **日常使用者 branch 不用走完主幹也能直接看**——是給「想用 AI 但不一定寫 code」的人。
 
 | Branch | 適合誰 | 主題 |
 |---|---|---|
@@ -136,6 +148,7 @@ flowchart TD
 | 💻 [開發者](branches/for-developer.md) | 軟體工程師 | Cursor · Aider · CLI delegation · code review |
 | 🎓 [教師](branches/for-teacher.md) 🚧 | 老師、講師 | 備課 · 投影片 · 學生 feedback *（目前最薄、歡迎貢獻）* |
 | 📊 [知識工作者](branches/for-knowledge-worker.md) | 顧問、PM、分析師 | Email · 會議紀錄 · report 自動化 |
+| 👥 [日常使用者](branches/for-everyday-users.md) | ChatGPT / Claude.ai 使用者 | 寫信 · 學習 · 隱私場景 · CLI agent 入門 |
 
 ---
 
@@ -183,29 +196,6 @@ flowchart TD
 
 ---
 
-## 📍 現況：Phase 6 community
-
-**Phase 1-4（已完成）** — 骨架 + curation depth + visual polish（134 個 project、3 個 Mermaid 圖、跨 stage [walkthrough](walkthroughs/build-first-agent-in-7-steps.md)、[style guide](resources/style-guide.md)、[維護腳本](scripts/)、`.github/` 模板）
-
-**Phase 5（已 ship — distribution scaffolding）**：
-- [x] [PDF build script](scripts/build-pdf.sh) + [mdBook config](book.toml) + [build script](scripts/build-mdbook.sh)
-- [x] [GitHub Pages auto-deploy workflow](.github/workflows/deploy-book.yml)
-- 一次性 setup：repo Settings → Pages → Source: GitHub Actions（見 [launch checklist](.github/launch-checklist.md)）
-
-**Phase 6（進行中 — community + maintenance）**：
-- [x] [CI lint workflow](.github/workflows/lint.yml) — PR 上自動跑禁用詞 + overclaim 檢查；每月 1 號自動跑 link-rot + star-drift
-- [x] [`CONTRIBUTORS.md`](CONTRIBUTORS.md) — stage / branch maintainer ladder（歡迎自薦）
-- [x] [`.github/launch-checklist.md`](.github/launch-checklist.md) — 推廣前的一次性 setup 清單
-- [ ] 啟用 GitHub Discussions（Settings → Features）
-- [ ] 提交到 [`AiHubCN/Awesome-Chinese-LLM`](https://github.com/AiHubCN/Awesome-Chinese-LLM) 等社群 awesome list
-- [ ] 發布 launch 文章（Threads / dev.to）
-
-📖 **網站版（啟用 Pages 後）**：https://wenyuchiou.github.io/awesome-agentic-ai-zh/
-📄 **PDF 版（手動 release 後）**：見 [Releases](https://github.com/WenyuChiou/awesome-agentic-ai-zh/releases)
-👥 **貢獻者 ladder**：見 [CONTRIBUTORS.md](CONTRIBUTORS.md)
-
----
-
 ## 🤝 如何貢獻
 
 這是個開放社群、歡迎各種貢獻：
@@ -215,8 +205,11 @@ flowchart TD
 - 📝 **完善內容** — 改進現有 stage 內容、修 typo → 直接 PR
 - ✍️ **新增 project** — 對某 stage 加 1-3 個新 project，附「為什麼這 project 教那個 stage」的說明
 - 🌏 **翻譯** — 補英文 companion 沒翻好的地方，或將內容翻成其他語言
+- 🌱 **擔任 Stage / Branch maintainer** — 長期 review 特定領域，見 [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
-詳見 [CONTRIBUTING.md](CONTRIBUTING.md)。
+PR 流程跟 style 規範見 [CONTRIBUTING.md](CONTRIBUTING.md) + [resources/style-guide.md](resources/style-guide.md)。
+
+> Repo 內部的 phase rollout 進度跟 launch checklist 見 [`.github/launch-checklist.md`](.github/launch-checklist.md)（給 maintainer 參考的內部文件）。
 
 ---
 

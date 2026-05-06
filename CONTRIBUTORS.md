@@ -33,6 +33,7 @@
 | 💻 for-developer | （社群 PR 機會） | — |
 | 🎓 for-teacher | **特別歡迎自薦**（目前最薄） | — |
 | 📊 for-knowledge-worker | （社群 PR 機會） | — |
+| 👥 for-everyday-users | （社群 PR 機會） | — |
 
 ## 💬 內容貢獻者 / Content contributors
 

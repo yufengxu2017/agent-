@@ -1,12 +1,12 @@
 # awesome-agentic-ai-zh
 
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Status](https://img.shields.io/badge/status-Phase%206%20in%20progress%20%C2%B7%20134%20projects-success)](#-status-phase-6-community)
+[![Status](https://img.shields.io/badge/status-Phase%206%20%C2%B7%20145%2B%20projects%20%C2%B7%205%20branches-success)](CONTRIBUTORS.md)
 [![Lang](https://img.shields.io/badge/lang-English-blue)](README.en.md) [![繁中](https://img.shields.io/badge/語言-繁體中文-red)](README.md)
 
 > **English companion. The zh-TW [README.md](README.md) is canonical** — content is curated in zh-TW first; this page mirrors it for English readers.
 
-A learning roadmap for agentic AI — from your first LLM API call to building multi-agent systems. **Structured as a 7-stage path, not a flat list**, with curated projects, hello-world demos, and required reading at every stage.
+A learning roadmap for agentic AI — **from LLM fundamentals to building multi-agent systems**. Structured 7-stage path: from "what is an LLM, how do tokens work" all the way to multi-agent orchestration and local deployment. Each stage has must-run demos, required reading, and curated projects.
 
 ---
 
@@ -27,7 +27,6 @@ After the main path, you go from "**LLM user**" to "**agent system builder**" �
 - [🗺️ The 7-Stage Learning Map](#️-the-7-stage-learning-map)
 - [💡 How to Learn](#-how-to-learn)
 - [📚 Related Resources](#-related-resources)
-- [🚀 Status: Phase 6 community](#-status-phase-6-community)
 - [🤝 Contributing](#-contributing)
 - [🙏 Acknowledgments](#-acknowledgments)
 - [🎓 Citation](#-citation)
@@ -53,15 +52,20 @@ cd awesome-agentic-ai-zh
 - 📖 **Fully free** — MIT-licensed, all content open
 - 🗺️ **Structured path** — 7 stages, clear "where am I, what's next"
 - 🛠️ **Must-run Hello-X demos** — 1-5 mini projects per stage; reading-only doesn't count
-- 🎯 **134 curated projects** — each with star rating, audience, what it teaches, how to run
+- 🎯 **145+ curated projects** — each with star rating, audience, what it teaches, how to run (incl. local LLM runners: Ollama, llama.cpp, LocalAI, MLX)
 - 🌏 **Bilingual** — zh-TW canonical, English mirror
 - 🎓 **Beyond frameworks: Claude Code ecosystem** — MCP / Skills / Plugins / SDK full stack
-- 🔬 **4 specialized branches** — researcher / developer / teacher / knowledge worker
+- 🔬 **5 specialized branches** — researcher / developer / teacher / knowledge worker / **everyday user**
 - ⏱️ **Honest time estimate** — 14-19 weeks minimum, 5-6 months realistic (5-8 hr/week part-time)
 
 ---
 
 ## 🗺️ The 7-Stage Learning Map
+
+![AI Agent Learning Map](resources/diagrams/learning-map.png)
+
+<details>
+<summary>Interactive version (Mermaid, screen-reader friendly)</summary>
 
 ```mermaid
 flowchart LR
@@ -76,6 +80,7 @@ flowchart LR
     S7 --> D["💻 Developer"]
     S7 --> T["🎓 Teacher"]
     S7 --> K["📊 Knowledge Worker"]
+    S7 --> E["👥 Everyday User"]
 
     style S0 fill:#f3f4f6,stroke:#6b7280
     style S3 fill:#fef3c7,stroke:#b45309
@@ -84,7 +89,10 @@ flowchart LR
     style D fill:#dcfce7,stroke:#166534
     style T fill:#fce7f3,stroke:#9d174d
     style K fill:#f3e8ff,stroke:#6b21a8
+    style E fill:#fef9c3,stroke:#854d0e
 ```
+
+</details>
 
 | Stage | Topic | Key Content | Time |
 |---|---|---|---|
@@ -101,21 +109,25 @@ flowchart LR
 
 > 💡 **Want a concrete cross-stage example?** [Build Your First AI Agent in 7 Steps](walkthroughs/build-first-agent-in-7-steps.en.md) — same Paper Summary Bot traced from Stage 1 through Stage 7, ~350 lines of executable code
 
-After the main path, pick one of 4 specialized branches. **Not sure which?**
+After the main path, pick one of 5 specialized branches. **Not sure which?**
 
 ```mermaid
 flowchart TD
-    Q1{What's your main work?}
+    Q1{What's your main work / use case?}
     Q1 -->|Papers / lit / experiments| R["🔬 Researcher<br/>for-researcher"]
     Q1 -->|Code / system maintenance| D["💻 Developer<br/>for-developer"]
     Q1 -->|Teaching / curriculum| T["🎓 Teacher<br/>for-teacher"]
     Q1 -->|Reports / meetings / analysis| K["📊 Knowledge Worker<br/>for-knowledge-worker"]
+    Q1 -->|No code; everyday life use| E["👥 Everyday User<br/>for-everyday-users"]
 
     style R fill:#dbeafe,stroke:#1e40af
     style D fill:#dcfce7,stroke:#166534
     style T fill:#fce7f3,stroke:#9d174d
     style K fill:#f3e8ff,stroke:#6b21a8
+    style E fill:#fef9c3,stroke:#854d0e
 ```
+
+> 💡 **The Everyday User branch can be read directly without walking the main path** — it's for people who want to use AI without writing code.
 
 | Branch | Best for | Topics |
 |---|---|---|
@@ -123,6 +135,7 @@ flowchart TD
 | 💻 [Developer](branches/for-developer.en.md) | Software engineers | Cursor · Aider · CLI delegation · code review |
 | 🎓 [Teacher](branches/for-teacher.en.md) 🚧 | Teachers, instructors | Lesson planning · slides · student feedback *(thinnest section, contributions welcome)* |
 | 📊 [Knowledge Worker](branches/for-knowledge-worker.en.md) | Consultants, PMs, analysts | Email · meeting notes · report automation |
+| 👥 [Everyday User](branches/for-everyday-users.en.md) | ChatGPT / Claude.ai users | Daily writing · learning · privacy · CLI agent intro |
 
 ---
 
@@ -170,40 +183,20 @@ For Chinese-speaking community:
 
 ---
 
-## 🚀 Status: Phase 6 community
-
-**Phase 1-4 (complete)** — skeleton + curation depth + visual polish (134 projects, 3 Mermaid diagrams, cross-stage [walkthrough](walkthroughs/build-first-agent-in-7-steps.en.md), [style guide](resources/style-guide.en.md), [maintenance scripts](scripts/), `.github/` templates)
-
-**Phase 5 (shipped — distribution scaffolding)**:
-- [x] [PDF build script](scripts/build-pdf.sh) + [mdBook config](book.toml) + [build script](scripts/build-mdbook.sh)
-- [x] [GitHub Pages auto-deploy workflow](.github/workflows/deploy-book.yml)
-- One-time setup: repo Settings → Pages → Source: GitHub Actions (see [launch checklist](.github/launch-checklist.md))
-
-**Phase 6 (in progress — community + maintenance)**:
-- [x] [CI lint workflow](.github/workflows/lint.yml) — auto-checks banned words + overclaim phrases on PR; monthly link-rot + star-drift cron
-- [x] [`CONTRIBUTORS.md`](CONTRIBUTORS.md) — stage / branch maintainer ladder (self-nominate via issue)
-- [x] [`.github/launch-checklist.md`](.github/launch-checklist.md) — pre-launch one-time setup checklist
-- [ ] Enable GitHub Discussions (Settings → Features)
-- [ ] Submit to community awesome lists ([`AiHubCN/Awesome-Chinese-LLM`](https://github.com/AiHubCN/Awesome-Chinese-LLM) etc.)
-- [ ] Launch posts (Threads / dev.to)
-
-📖 **Hosted version (post-deploy)**: https://wenyuchiou.github.io/awesome-agentic-ai-zh/
-📄 **PDF (post-deploy)**: see [Releases](https://github.com/WenyuChiou/awesome-agentic-ai-zh/releases)
-👥 **Contributor ladder**: see [CONTRIBUTORS.md](CONTRIBUTORS.md)
-
----
-
 ## 🤝 Contributing
 
-We're an open community welcoming all contributions:
+This is an open community welcoming all contributions:
 
 - 🐛 **Bug reports** — wrong content, broken links, stale info → open Issue
 - 💡 **Suggestions** — missing stage / new project to add → open Issue to discuss
 - 📝 **Improvements** — refine existing stage content, fix typos → direct PR
 - ✍️ **Add a project** — 1-3 new projects per stage with "why this teaches that stage" rationale
 - 🌏 **Translations** — improve the English companion or translate to other languages
+- 🌱 **Become a Stage / Branch maintainer** — long-term review of a specific area, see [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
-Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`resources/style-guide.en.md`](resources/style-guide.en.md) before opening a PR.
+PR process and style rules: [CONTRIBUTING.md](CONTRIBUTING.md) + [resources/style-guide.en.md](resources/style-guide.en.md).
+
+> Internal phase rollout progress and launch checklist: [`.github/launch-checklist.md`](.github/launch-checklist.md) (maintainer-facing internal doc).
 
 ---
 
