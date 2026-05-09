@@ -126,8 +126,13 @@ def main():
 
     for fp in find_md_files(REPO_ROOT):
         text = fp.read_text(encoding="utf-8")
-        # 一個簡單的 state machine：找到 `[...](https://github.com/X/Y)`，
-        # 然後在接下來 N 行裡找 `★ Xk+`
+        # State machine: find `[...](https://github.com/X/Y)`, then locate `★ Xk+`.
+        # Search order:
+        #   1. SAME line as the URL (table format like `| repo | ... | ★ 80k+ |`
+        #      and inline bullets like `[repo](url) ★ 6k+ — desc`).
+        #   2. Fallback: next 12 lines (entry-block format with stars on separate
+        #      line, e.g. `#### [repo](url)\n\n| Stars | ★ 12k+ |`).
+        #   3. Stop at heading / horizontal-rule boundary to avoid cross-entry leakage.
         lines = text.splitlines()
         for i, line in enumerate(lines):
             m_repo = GITHUB_RE.search(line)
@@ -136,19 +141,24 @@ def main():
             repo = normalize_repo(m_repo.group(1), m_repo.group(2))
             if repo is None:
                 continue
-            # 在接下來最多 12 行內找 stars。
-            # 但若先碰到下一個 `### / #### / ## ` heading，就停（避免跨 entry 找錯）
             declared = None
             declared_text = None
-            for j in range(i + 1, min(i + 12, len(lines))):
-                stripped = lines[j].lstrip()
-                if stripped.startswith(("### ", "#### ", "## ", "---", "# ")):
-                    break  # 撞到下一個 entry 邊界
-                m_stars = STARS_RE.search(lines[j])
-                if m_stars:
-                    declared = parse_stars_text(m_stars.group(0))
-                    declared_text = m_stars.group(0)
-                    break
+            # Step 1: same-line stars first (table / bullet formats)
+            m_stars = STARS_RE.search(line)
+            if m_stars:
+                declared = parse_stars_text(m_stars.group(0))
+                declared_text = m_stars.group(0)
+            else:
+                # Step 2: fallback to next 12 lines
+                for j in range(i + 1, min(i + 12, len(lines))):
+                    stripped = lines[j].lstrip()
+                    if stripped.startswith(("### ", "#### ", "## ", "---", "# ")):
+                        break  # 撞到下一個 entry 邊界
+                    m_stars = STARS_RE.search(lines[j])
+                    if m_stars:
+                        declared = parse_stars_text(m_stars.group(0))
+                        declared_text = m_stars.group(0)
+                        break
             entries.setdefault(repo, []).append((fp, declared, i + 1, declared_text or "(no stars line)"))
 
     # 去重 repo（每個 repo 只查一次）
