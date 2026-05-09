@@ -68,8 +68,8 @@ description: Review staged changes for security + style
 
 ### CLAUDE.md 范例库
 
-#### [Anthropic 官方范例](https://github.com/anthropics/claude-code/blob/main/CLAUDE.md)
-★ official — Claude Code repo 自己的 CLAUDE.md，看官方怎么写。
+#### [Anthropic 官方文档](https://docs.anthropic.com/en/docs/claude-code/memory)
+official — Claude Code memory / CLAUDE.md 编写的官方说明，含 best practices。
 
 #### [obra/superpowers](https://github.com/obra/superpowers) ⭐⭐⭐⭐
 ★ 178k+ — 不只是 skill collection，也是 production CLAUDE.md 范本。看 `.claude/` whole directory structure。

@@ -108,7 +108,7 @@
 
 #### [WenyuChiou/ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) ⭐⭐⭐⭐⭐
 
-★ 47 · MIT — 14 個 Claude Code skills 涵蓋研究全流程（文獻分流、研究設計、project context、論文撰寫、multi-AI delegation），打包成 5-plugin marketplace。一個指令裝整套。
+★ 60 · MIT — 14 個 Claude Code skills 涵蓋研究全流程（文獻分流、研究設計、project context、論文撰寫、multi-AI delegation），打包成 5-plugin marketplace。一個指令裝整套。
 
 #### [WenyuChiou/research-hub](https://github.com/WenyuChiou/research-hub) ⭐⭐⭐⭐
 

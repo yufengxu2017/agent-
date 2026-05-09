@@ -696,7 +696,7 @@
 
 | Field | Value |
 |---|---|
-| Stars | ★ 47 |
+| Stars | ★ 60 |
 | License | MIT |
 | Rating | ⭐⭐⭐⭐⭐ (full research workflow) |
 

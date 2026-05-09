@@ -68,8 +68,8 @@ Compile these into your own cheat sheet.
 
 ### CLAUDE.md Examples
 
-#### [Anthropic official example](https://github.com/anthropics/claude-code/blob/main/CLAUDE.md)
-★ official — The Claude Code repo's own CLAUDE.md. See how the official folks write theirs.
+#### [Anthropic official docs](https://docs.anthropic.com/en/docs/claude-code/memory)
+official — Claude Code memory / CLAUDE.md authoring docs, including best practices.
 
 #### [obra/superpowers](https://github.com/obra/superpowers) ⭐⭐⭐⭐
 ★ 178k+ — Not just a skill collection but also a production CLAUDE.md template. Read the full `.claude/` structure.

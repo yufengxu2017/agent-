@@ -109,7 +109,7 @@ Claude Code infrastructure for PhD researchers — skills, agents, hooks, rules 
 
 #### [WenyuChiou/ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) ⭐⭐⭐⭐⭐
 
-★ 47 · MIT — 14 Claude Code skills covering the full research pipeline (lit triage, research design, project context, manuscript writing, multi-AI delegation), packaged as a 5-plugin marketplace. One command installs everything.
+★ 60 · MIT — 14 Claude Code skills covering the full research pipeline (lit triage, research design, project context, manuscript writing, multi-AI delegation), packaged as a 5-plugin marketplace. One command installs everything.
 
 #### [WenyuChiou/research-hub](https://github.com/WenyuChiou/research-hub) ⭐⭐⭐⭐
 
