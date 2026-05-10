@@ -35,6 +35,10 @@
 
 ## 📚 快速开始
 
+### 🚀 第一次接触 AI agent / 没写过 code？
+
+先看 **[`resources/setup-guide.zh-Hans.md`](resources/setup-guide.zh-Hans.md)** — 30-45 分钟从零带你申请 API key、装好 Python、跑出第一个 LLM hello-world。
+
 ### 在线阅读
 - **[学习地图（两条学习路径）](#️-学习地图两条学习路径)** — 看完这节决定走 Track A 还 Track B
 - **[Stage 0 基础准备](stages/00-foundations.zh-Hans.md)** — 已经会 Python / git / API 的人可以直接跳 Stage 1

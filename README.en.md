@@ -49,6 +49,10 @@ After the main path, you go from "**LLM user**" to "**agent system builder**" �
 
 ## 📚 Quick Start
 
+### 🚀 First time with AI agents / never written code before?
+
+Start here: **[`resources/setup-guide.en.md`](resources/setup-guide.en.md)** — 30-45 minutes from zero, walks you through getting an API key, installing Python, and running your first LLM hello-world.
+
 ### Read online
 - **[Learning Map (Two Tracks)](#️-learning-map-two-tracks)** — read this section to decide Track A or Track B
 - **[Stage 0 Foundations](stages/00-foundations.en.md)** — already know Python / git / API? Skip straight to Stage 1
