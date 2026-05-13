@@ -196,7 +196,35 @@ pip install mcp
 
 ---
 
-## 5.3 — Skills（Claude Code 的行為層）
+## 5.3 — Skills（Claude Code 的行為層）⭐ Claude Code 生態最關鍵的一層
+
+### Skill 是什麼（先定位）
+
+Skill = **一個 markdown 檔**（`.claude/skills/<name>/SKILL.md`），告訴 Claude「**遇到某情境 → 走某流程**」。Claude 每次 inference 前掃所有可用 skill 的 `description` frontmatter、看是否匹配當前情境、**匹配就把 SKILL.md 自動載入 context**。
+
+**核心 mental model**：你發現自己「**每次都要打同樣的 prompt 教 Claude 怎麼做某件事**」→ 把它寫成 skill、下次就不用了。Claude Code 生態裡 **skill 是 power user 跟普通用戶的分水嶺**——熟練 skill 寫作的人能把 1 個小時的工作壓到 5 分鐘。
+
+### Skill vs CLAUDE.md vs MCP vs Plugin vs Subagent — 一張表分清楚
+
+各層常被搞混。**一行對照**：
+
+| 元件 | 是什麼 | 何時用 | 觸發方式 | 範例 |
+|---|---|---|---|---|
+| **CLAUDE.md**（5.1） | repo / project 的 baseline 行為 | repo-wide convention（「用 type hint」、「commit 訊息規範」）| **每個 session 都載入**、不分情境 | 你 repo 根目錄的 CLAUDE.md |
+| **MCP server**（5.2） | 提供 tool / data 的 protocol server | 想讓 Claude 能存取**外部資源**（API / DB / 檔案系統） | server 啟動後、任何時候都能呼叫 | `github` MCP / `postgres` MCP |
+| **Skill**（**本節**） | **特定情境的行為包** | 想設定「**遇到 X 情境 → 走 Y 流程**」 | **description 匹配自動載入** | `skill-vetter`（裝 skill 前檢查）/ `pdf`（處理 PDF） |
+| **Plugin**（5.4） | 把 skills + commands + MCP + hooks 打包散佈 | 想 share / install **一整套** 設定 | `/plugin install <name>@<marketplace>` | `engineering` bundle / `finance` bundle |
+| **Subagent**（5.5） | 獨立 context 的 sub-Claude session | 想 delegate **大 context 任務**、結果回主 session | description 匹配自動 delegate | code-reviewer subagent / 研究員 subagent |
+
+**怎麼選**：
+
+- 一句話設定 → 寫進 `CLAUDE.md`
+- 多步驟流程、某情境才用 → 寫 **Skill**（本節主題）
+- 需要存取外部資源（API / DB） → 寫 **MCP server**
+- Skill 跑起來太大、會吃光主 session window → 改成 **Subagent**
+- Skill / command / MCP / hook 想打包送人 → 包成 **Plugin**
+
+→ **核心區分**：MCP 是「**能力**」、Skill 是「**行為**」、Plugin 是「**散佈**」、Subagent 是「**獨立 worker**」。
 
 ### 學習目標
 - `SKILL.md` 的結構（YAML frontmatter + 本文）
@@ -217,116 +245,48 @@ pip install mcp
 
 > 📦 **本 repo 自帶 meta-example**：[`examples/stage-5/tool-calling-tutor/`](../examples/stage-5/tool-calling-tutor/) 是這個 stage 的對應 skill 範本——完整 frontmatter（含 trigger phrases + Do NOT use for）、3 份 `references/`、`evals/evals.json` 5 個 test case，**直接 fork 改成你自己的 skill**。雙重用途：(a) 學習者自用、卡在 tool calling 時讓它 auto-load 幫你 debug；(b) Stage 5 §5.3 SKILL.md 寫法的對照樣板。
 
-### 精選 Projects
+### 常用 Skills 推薦（按用途分類）
+
+> 不知道從哪裡開始？下面是 2025 後段官方 + 社群常用 skill。**安裝方式**：(a) 多數來自 plugin、安裝對應 plugin 即得；(b) 或從 [anthropics/skills](https://github.com/anthropics/skills) clone 後放進 `~/.claude/skills/` 或 `.claude/skills/`。
+
+| 用途 | Skill | 來源 | 為什麼推薦 |
+|---|---|---|---|
+| **🛡 裝 skill 前安全檢查**（必裝） | `skill-vetter` | anthropics/skills | **裝任何外部 skill 前必跑**——檢查紅旗、permission scope、suspicious pattern。等於 marketplace skill 的 SAST |
+| **🔍 找 / 安裝 skill** | `find-skills` | anthropics/skills | 自然語言查詢、自動安裝。「我想要做 X」就回對應 skill |
+| | `skill-lookup` | claude-plugins-official | 跟 find-skills 互補，探索 / 搜尋 helper |
+| **✍ 寫自己的 skill** | `skill-creator` | anthropics/skills + claude-plugins-official | 自動產生 frontmatter + 子目錄結構、寫 skill 必裝 |
+| **📄 Office docs 處理** | `pdf` / `docx` / `xlsx` / `pptx` | anthropics/skills | 讀寫 PDF / Word / Excel / PowerPoint。**必裝 set**——任何 office workflow 必備 |
+| **🔧 Code review** | `code-reviewer` / `code-review-excellence` | claude-plugins-official | staged diff 安全 / 風格 / 測試 review |
+| **🐛 Debug** | `debugger` / `systematic-debugging` | claude-plugins-official | 系統化 root cause 分析、避免 quick fix |
+| **🎓 學術寫作** | `academic-writing-skills` | community | findings-first / mechanism / banned word audit |
+| **🔌 MCP 整合 / 寫 server** | `mcp-builder` / `mcp-integration` | claude-plugins-official | 寫 MCP server 跟整合既有 server 的腳手架 |
+| **💻 frontend / fullstack** | `frontend-developer` / `fullstack-developer` | claude-plugins-official | React 元件 / 全棧架構輔助 |
+| **📊 資料分析** | `data-analyst` / `visualization-expert` | community | SQL / pandas / chart 選型 |
+| **⚙ 權限 / 設定整理** | `update-config` / `fewer-permission-prompts` | claude-plugins-official | hooks / permissions / env var 管理 |
+| **🔁 自我改進** | `self-improving-agent` | community | 捕捉 learning / error / correction、agent 持續改進 |
+| **🌐 通用 / fallback** | `general-purpose` | Claude Code 內建 | 複雜開放任務、未涵蓋情境的 default 入口 |
+
+**建議入手順序**：
+1. **第一個必裝**：`skill-vetter`（裝其他 skill 前先用它檢查）
+2. **第二批必裝**：`skill-creator` + `find-skills`（寫 / 找 skill 用）
+3. **依工作領域**：Office workflow 加 `pdf`/`docx`/`xlsx`、開發加 `code-reviewer`/`debugger`、學術寫作加 `academic-writing-skills`
+4. **想看更多**：逛 `obra/superpowers` 或 `wshobson/agents` 看 production 範本
+
+### 精選 Projects（spec / 範本參考）
 
 > 💡 **找日常用 Skill（NotebookLM、Excalidraw、Office docs 等）？**
-> 看 [`resources/mcp-skills-catalog.md`](../resources/mcp-skills-catalog.md)——按使用情境分類，含 Anthropic 官方 + 社群 Skill。下面這節保留的是「**寫自己 Skill 時的 reference**」性質的 spec / showcase。
+> 看 [`resources/mcp-skills-catalog.md`](../resources/mcp-skills-catalog.md)——按使用情境分類，含 Anthropic 官方 + 社群 Skill。下表保留的是「**寫自己 Skill 時的 spec / showcase reference**」性質。
 
-#### [anthropics/skills](https://github.com/anthropics/skills) ⭐ 官方 spec
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 128k+ |
-| License | NOASSERTION |
-| 推薦度 | ⭐⭐⭐⭐⭐ |
-
-**教什麼**：Anthropic 官方的 Skills repo——`spec/`（SKILL.md frontmatter 標準）+ `template/`（起手範本）+ `skills/`（pdf、docx、xlsx、pptx、skill-creator 等 reference 實作）。
-
-**適合誰**：寫自己的 SKILL.md 之前先讀這個——SKILL.md 結構與 frontmatter 的重要參考實作。
-
-**備註**：跟 `anthropics/claude-code` 不一樣——這個是專門的 Skills repo，後者是 Claude Code 的主 repo。Agent Skills 的更廣義標準另見 [agentskills.io](https://agentskills.io)。
-
----
-
-#### [anthropics/claude-code](https://github.com/anthropics/claude-code)
-
-| 欄位 | 內容 |
-|---|---|
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：Claude Code 主 repo，內含 issues、releases 與一些 inline skill 範例。
-
-**適合誰**：追蹤新版功能、回報 bug、看 release notes。
-
-**備註**：在這個 stage（學 Skills），這個 repo 排在 `anthropics/skills`（⭐⭐⭐⭐⭐ 官方 spec）後面，所以給 ⭐⭐⭐⭐。在 branches（給 end-user 當入口）裡會看到 ⭐⭐⭐⭐⭐ 評等，是因為角色不同。
-
----
-
-#### [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills)
-
-| 欄位 | 內容 |
-|---|---|
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：社群 Claude Skills 的精選目錄。
-
-**適合誰**：自己寫之前先看看有沒有現成的。
-
----
-
-#### [obra/superpowers](https://github.com/obra/superpowers)
-
-| 欄位 | 內容 |
-|---|---|
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：20+ 個經過實戰檢驗的 skill（TDD、debugging、合作模式），附 `/brainstorm`、`/write-plan`、`/execute-plan` 命令以及 skills-search tool。
-
-**適合誰**：power user 的設定。讀 SKILL.md 原始碼學進階寫法。
-
----
-
-#### [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 20k+ |
-| License | MIT |
-| 推薦度 | ⭐⭐⭐ |
-
-**教什麼**：1000+ 個 agent skill，相容於 Claude Code、Codex、Gemini CLI、Cursor。跨工具的視角。
-
-**適合誰**：搞懂 SKILL.md 之後，逛逛找想法。
-
----
-
-#### [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills)
-
-| 欄位 | 內容 |
-|---|---|
-| 推薦度 | ⭐⭐⭐ |
-
-**教什麼**：232+ 個 Claude Code skill，跨 engineering、marketing、product、compliance。
-
-**適合誰**：找特定領域的 skill 範例。
-
----
-
-#### [mattpocock/skills](https://github.com/mattpocock/skills)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 61k+ |
-| License | MIT |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：Matt Pocock（TypeScript 社群知名教學者）公開自己工作中真實在用的 `.claude/` 目錄。每個 SKILL.md 都很短（10-50 行），不過度工程化。
-
-**適合誰**：想看「真實工程師日常用的 SKILL.md 長什麼樣子」的人。對照那些動輒 200 行的 over-engineered skill，這份特別有參考價值。
-
----
-
-#### [wshobson/agents](https://github.com/wshobson/agents)
-
-| 欄位 | 內容 |
-|---|---|
-| Stars | ★ 35k+ |
-| License | MIT |
-| 推薦度 | ⭐⭐⭐⭐ |
-
-**教什麼**：把 skills + subagents 組合起來做 multi-agent 編排。**從單一 SKILL.md 進化到 agent-as-skill 組合 pattern** 的範例。
-
-**適合誰**：跑過幾個 SKILL.md 之後，想知道「skill 之間怎麼互相呼叫、怎麼變成更大的 agent workflow」的中階學習者。
+| Project | ⭐ | 適合誰 | 為什麼推薦 / 備註 |
+|---|---|---|---|
+| [anthropics/skills](https://github.com/anthropics/skills) ⭐ 官方 spec | ⭐⭐⭐⭐⭐ | 寫自己 SKILL.md 前先讀 | Anthropic 官方 Skills repo：`spec/`（frontmatter 標準）+ `template/` 起手範本 + `skills/` 含 pdf / docx / xlsx / pptx / skill-creator / skill-vetter 等 reference 實作。★ 128k+。**SKILL.md 結構參考首選**。Agent Skills 更廣義標準另見 [agentskills.io](https://agentskills.io) |
+| [anthropics/claude-code](https://github.com/anthropics/claude-code) | ⭐⭐⭐⭐ | 追蹤新功能、看 release notes | Claude Code 主 repo、含 issues / releases / inline skill 範例。本 stage 學 Skill 重點看上一個 repo、這個排第二 |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | ⭐⭐⭐⭐ | 想看「真實工程師日常 SKILL.md」 | Matt Pocock（TypeScript 社群知名教學者）公開自己工作真實在用的 `.claude/` 目錄。每個 SKILL.md **10-50 行極短**、不過度工程化。**對照 over-engineered 200 行 skill 特別有參考價值**（★ 61k+、MIT）|
+| [obra/superpowers](https://github.com/obra/superpowers) | ⭐⭐⭐⭐ | power user setup、學進階寫法 | 20+ 實戰 skill（TDD、debugging、合作模式）+ `/brainstorm` / `/write-plan` / `/execute-plan` 命令 + skills-search tool |
+| [wshobson/agents](https://github.com/wshobson/agents) | ⭐⭐⭐⭐ | 中階：學 skill + subagent 組合 | 把 skills + subagents 組合做 multi-agent 編排。**從單一 SKILL.md 進化到 agent-as-skill 組合 pattern** 的範例（★ 35k+、MIT） |
+| [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) | ⭐⭐⭐⭐ | 自己寫前先找有沒有現成的 | 社群 Claude Skills 精選目錄 |
+| [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | ⭐⭐⭐ | 跨工具視角 | 1000+ agent skill、相容 Claude Code / Codex / Gemini CLI / Cursor（★ 20k+、MIT）|
+| [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | ⭐⭐⭐ | 找特定領域 skill 範例 | 232+ Claude Code skill、跨 engineering / marketing / product / compliance |
 
 ---
 
