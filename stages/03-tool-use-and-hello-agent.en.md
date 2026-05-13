@@ -35,7 +35,7 @@ You should already:
 
 ## 🛠 Hands-on Exercises (5 to do)
 
-> 🦙 **This stage defaults to Ollama qwen2.5:3b** (cost-driven; reliable tool-use support). Once you enter Stage 3 — tool calling and the ReAct loop — `gemma3:4b` no longer suffices; switch to `qwen2.5:3b` (1.9 GB; install with `ollama pull qwen2.5:3b`). Every exercise has Path A (Ollama, default) + Path B (Anthropic, optional — when you want to see cloud-quality tool use).
+> 🦙 **This stage defaults to Ollama qwen2.5:3b** (cost-driven; reliable tool-use support). Once you enter Stage 3 — tool calling and the ReAct loop — `gemma3n:e4b` no longer suffices; switch to `qwen2.5:3b` (1.9 GB; install with `ollama pull qwen2.5:3b`). Every exercise has Path A (Ollama, default) + Path B (Anthropic, optional — when you want to see cloud-quality tool use).
 >
 > Full three-path trade-off in [`examples/README.en.md`](../examples/README.en.md#three-paths--default-is-ollama-cost-driven).
 

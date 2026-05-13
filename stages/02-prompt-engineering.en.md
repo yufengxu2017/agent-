@@ -33,7 +33,7 @@ You should already:
 
 ## 🛠 Hands-on Exercises
 
-> 🦙 **This stage defaults to Ollama gemma3:4b** (cost-driven; $0/run). Prompt engineering is especially instructive on small models — they are sensitive to prompt quality, so you can clearly see how much each technique (system prompts, few-shot, CoT, refinement) improves output. Every exercise has Path A (Ollama, default) + Path B (Anthropic, optional).
+> 🦙 **This stage defaults to Ollama gemma3n:e4b** (cost-driven; $0/run). Prompt engineering is especially instructive on small models — they are sensitive to prompt quality, so you can clearly see how much each technique (system prompts, few-shot, CoT, refinement) improves output. Every exercise has Path A (Ollama, default) + Path B (Anthropic, optional).
 >
 > Full three-path trade-off in [`examples/README.en.md`](../examples/README.en.md#three-paths--default-is-ollama-cost-driven).
 
@@ -161,7 +161,7 @@ print(f"\n✅ Exercise 2 passed — 0-shot {c0}/{n}, 3-shot {c3}/{n}")
 assert c3 >= c0, f"expected 3-shot ≥ 0-shot, got {c3} < {c0}"
 ```
 
-> 🦙 **Ollama equivalent**: few-shot prompts typically lift small models (gemma3:4b) by an even **larger** margin — smaller models depend more on examples for calibration. SDK swap matches Exercise 1 Path B.
+> 🦙 **Ollama equivalent**: few-shot prompts typically lift small models (gemma3n:e4b) by an even **larger** margin — smaller models depend more on examples for calibration. SDK swap matches Exercise 1 Path B.
 
 </details>
 
@@ -228,7 +228,7 @@ assert ans_b == ANSWER or ans_c == ANSWER, "B (step-by-step) or C (CoT example) 
 print(f"\n✅ Exercise 3 passed — {correct}/3 correct")
 ```
 
-> 🦙 **Ollama equivalent**: CoT is **essential** for small models like gemma3:4b — without step-by-step they fail this almost completely. Use this exercise to measure how strongly each model depends on CoT.
+> 🦙 **Ollama equivalent**: CoT is **essential** for small models like gemma3n:e4b — without step-by-step they fail this almost completely. Use this exercise to measure how strongly each model depends on CoT.
 
 </details>
 
@@ -281,7 +281,7 @@ print(f"💡 Observe: v1 ({v1_len} chars) is typically looser than v5 ({v5_len} 
 print("💡 The 5 dimensions: (1) target audience (2) format (3) length (4) example demand (5) banned words")
 ```
 
-> 🦙 **Ollama equivalent**: running 5 refine iterations on gemma3:4b is especially instructive — you'll watch "v1 vague" struggle to produce anything useful and "v5 +bans" show the biggest jump. Small models are highly sensitive to prompt quality, which makes them an excellent sparring partner for prompt engineering.
+> 🦙 **Ollama equivalent**: running 5 refine iterations on gemma3n:e4b is especially instructive — you'll watch "v1 vague" struggle to produce anything useful and "v5 +bans" show the biggest jump. Small models are highly sensitive to prompt quality, which makes them an excellent sparring partner for prompt engineering.
 
 </details>
 

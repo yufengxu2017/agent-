@@ -67,7 +67,7 @@ if hasattr(sys.stdout, "reconfigure"):
 ### Path A（**默認、推薦**）— Ollama 本機
 - 預設 `starter.py` / 第一個 inline `<details>` 用本機 LLM
 - 需 [Ollama](https://ollama.com)、按 stage pull 對應 model：
-  - **Stage 1 + 2**（純 chat / prompt eng）：`ollama pull gemma3:4b`（3.3 GB、CPU 跑也通）
+  - **Stage 1 + 2**（純 chat / prompt eng）：`ollama pull gemma3n:e4b`（~7.5 GB、多模態、CPU 跑得動）
   - **Stage 3+**（tool use / agent）：`ollama pull qwen2.5:3b`（1.9 GB、tool-use 支援穩定）
 - 全程 $0、offline、隱私敏感資料 OK
 - SDK 用 `openai` package（OpenAI-compatible API）、`base_url="http://localhost:11434/v1"`
@@ -106,7 +106,7 @@ if hasattr(sys.stdout, "reconfigure"):
 # 從這個（Path A 默認）：
 from openai import OpenAI
 client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
-r = client.chat.completions.create(model="gemma3:4b", ...)
+r = client.chat.completions.create(model="gemma3n:e4b", ...)
 
 # 換成這個（Path B、若有 ANTHROPIC_API_KEY）：
 import anthropic

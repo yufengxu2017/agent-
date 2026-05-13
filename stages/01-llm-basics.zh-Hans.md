@@ -34,19 +34,19 @@
 
 ## “动手”小练习（在本地运行这些代码）
 
-> 🦙 **本 stage 默认用 Ollama**（成本考量、本机 `gemma3:4b` 跑得动、$0/run）。每个练习都有 Path A（Ollama、默认）+ Path B（Anthropic、选择性、想看 cloud 高品质时用）。完整 3 路 trade-off 见 [`examples/README.zh-Hans.md`](../examples/README.zh-Hans.md#三条路径--默认用-ollama成本考量)。
+> 🦙 **本 stage 默认用 Ollama**（成本考量、本机 `gemma3n:e4b` 跑得动、$0/run）。每个练习都有 Path A（Ollama、默认）+ Path B（Anthropic、选择性、想看 cloud 高品质时用）。完整 3 路 trade-off 见 [`examples/README.zh-Hans.md`](../examples/README.zh-Hans.md#三条路径--默认用-ollama成本考量)。
 >
-> 💰 **不装 Ollama 也能读** — 每个练习的 Path B 区块就是 Anthropic 版、选一个跑就行。先 [`pip install openai && ollama pull gemma3:4b`](https://ollama.com) 就装好 Path A 环境。
+> 💰 **不装 Ollama 也能读** — 每个练习的 Path B 区块就是 Anthropic 版、选一个跑就行。先 [`pip install openai && ollama pull gemma3n:e4b`](https://ollama.com) 就装好 Path A 环境。
 
 ### 练习 1：LLM API（hello world）
 五行 Python 调用 LLM 并印出回应。**默认用 Ollama 本机跑（免费、offline）**；想看 cloud 答案品质改 Path B Anthropic。详见 [`examples/README.zh-Hans.md`](../examples/README.zh-Hans.md#三条路径--默认用-ollama成本考量)。
 
 <details open>
-<summary>📋 <b>起手码 — Path A（本机 Ollama gemma3:4b、默认）</b>（复制到 <code>practice_1.py</code>、<code>python practice_1.py</code> 就跑）</summary>
+<summary>📋 <b>起手码 — Path A（本机 Ollama gemma3n:e4b、默认）</b>（复制到 <code>practice_1.py</code>、<code>python practice_1.py</code> 就跑）</summary>
 
 ```python
 # 需要：pip install openai      (用 OpenAI 兼容 SDK 跟 Ollama 沟通)
-# 前置：ollama pull gemma3:4b && ollama serve
+# 前置：ollama pull gemma3n:e4b && ollama serve
 import sys
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -59,7 +59,7 @@ client = OpenAI(
 )
 
 r = client.chat.completions.create(
-    model="gemma3:4b",   # 换成 qwen2.5:3b / llama3.2:3b 也可
+    model="gemma3n:e4b",   # 换成 qwen2.5:3b / llama3.2:3b 也可
     max_tokens=100,
     messages=[{"role": "user", "content": "用一句话自我介绍。"}],
 )
@@ -72,7 +72,7 @@ print("usage:", r.usage)
 assert r.choices[0].finish_reason in ("stop", "length"), f"非预期 finish_reason: {r.choices[0].finish_reason}"
 assert len(text) > 0, "回应不应为空"
 assert r.usage.completion_tokens > 0, "output token 应 > 0"
-print("✅ 练习 1 通过 — Ollama gemma3:4b 已能本机回应、$0/次")
+print("✅ 练习 1 通过 — Ollama gemma3n:e4b 已能本机回应、$0/次")
 ```
 
 **慢吗？** Gemma 4B 在 CPU 上约 5-30s/答案、有 GPU（RTX 3060+）<2s。要更快用 `gemma3:1b`、要更聪明改 `qwen2.5:14b` / `llama3.3:8b`（需 8GB+ VRAM）。

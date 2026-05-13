@@ -35,19 +35,19 @@ If not — go back to Stage 0 first.
 
 ## 🛠 Hands-on Exercises (do them, not just read)
 
-> 🦙 **This stage defaults to Ollama** (cost-driven; `gemma3:4b` runs locally for $0/run). Every exercise has Path A (Ollama, default) + Path B (Anthropic, optional — use it when you want to see cloud-quality answers). Full three-path trade-off in [`examples/README.en.md`](../examples/README.en.md#three-paths--default-is-ollama-cost-driven).
+> 🦙 **This stage defaults to Ollama** (cost-driven; `gemma3n:e4b` runs locally for $0/run). Every exercise has Path A (Ollama, default) + Path B (Anthropic, optional — use it when you want to see cloud-quality answers). Full three-path trade-off in [`examples/README.en.md`](../examples/README.en.md#three-paths--default-is-ollama-cost-driven).
 >
-> 💰 **Don't have Ollama yet?** Each exercise also includes a Path B block running on Anthropic — pick one. To enable Path A in one step: [`pip install openai && ollama pull gemma3:4b`](https://ollama.com).
+> 💰 **Don't have Ollama yet?** Each exercise also includes a Path B block running on Anthropic — pick one. To enable Path A in one step: [`pip install openai && ollama pull gemma3n:e4b`](https://ollama.com).
 
 ### Exercise 1: LLM API (hello world)
 Five-line Python script that calls an LLM and prints the response. **Defaults to local Ollama (free, offline)**; switch to Path B Anthropic when you want cloud-quality answers. Details in [`examples/README.en.md`](../examples/README.en.md#three-paths--default-is-ollama-cost-driven).
 
 <details open>
-<summary>📋 <b>Starter code — Path A (local Ollama gemma3:4b, default)</b> (copy to <code>practice_1.py</code> and run <code>python practice_1.py</code>)</summary>
+<summary>📋 <b>Starter code — Path A (local Ollama gemma3n:e4b, default)</b> (copy to <code>practice_1.py</code> and run <code>python practice_1.py</code>)</summary>
 
 ```python
 # Requires: pip install openai      (OpenAI-compatible SDK talks to Ollama)
-# Pre-req: ollama pull gemma3:4b && ollama serve
+# Pre-req: ollama pull gemma3n:e4b && ollama serve
 import sys
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -60,7 +60,7 @@ client = OpenAI(
 )
 
 r = client.chat.completions.create(
-    model="gemma3:4b",   # swap to qwen2.5:3b / llama3.2:3b if preferred
+    model="gemma3n:e4b",   # swap to qwen2.5:3b / llama3.2:3b if preferred
     max_tokens=100,
     messages=[{"role": "user", "content": "Introduce yourself in one sentence."}],
 )
@@ -73,7 +73,7 @@ print("usage:", r.usage)
 assert r.choices[0].finish_reason in ("stop", "length"), f"unexpected finish_reason: {r.choices[0].finish_reason}"
 assert len(text) > 0, "response should not be empty"
 assert r.usage.completion_tokens > 0, "output token count should be > 0"
-print("✅ Exercise 1 passed — local Ollama gemma3:4b answered for $0")
+print("✅ Exercise 1 passed — local Ollama gemma3n:e4b answered for $0")
 ```
 
 **How slow?** Gemma 4B on CPU: ~5-30 s/answer; on GPU (RTX 3060+): <2 s. For speed use `gemma3:1b`; for quality use `qwen2.5:14b` / `llama3.3:8b` (needs 8 GB+ VRAM).

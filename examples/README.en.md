@@ -67,7 +67,7 @@ Every exercise ships with all three paths:
 ### Path A (**default, recommended**) — local Ollama
 - Default `starter.py` / first inline `<details>` block uses a local model
 - Requires [Ollama](https://ollama.com); pull a model based on the stage:
-  - **Stage 1 + 2** (plain chat / prompt eng): `ollama pull gemma3:4b` (3.3 GB; CPU-friendly)
+  - **Stage 1 + 2** (plain chat / prompt eng): `ollama pull gemma3n:e4b` (~7.5 GB; multimodal (text + image + audio); CPU-friendly)
   - **Stage 3+** (tool use / agent): `ollama pull qwen2.5:3b` (1.9 GB; reliable tool-use support)
 - $0, offline, fine for privacy-sensitive data
 - SDK uses the `openai` package (OpenAI-compatible API) with `base_url="http://localhost:11434/v1"`
