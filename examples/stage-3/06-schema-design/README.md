@@ -1,35 +1,82 @@
 > **繁體中文** | [简体中文](./README.zh-Hans.md) | [English](./README.en.md)
 
-# 練習 6：Function schema 設計
+# 練習 6：Function Schema 設計（bad vs good）
 
-這個練習用 `starter_bad.py` 與 `starter_good.py` 對照同一個問題：「把攝氏 32 度換成華氏」。壞 schema 的 description 太模糊，參數都用 string，沒有 required，也沒有 enum；模型很容易把溫度轉換丟給 `process_data`。好 schema 則把工具用途、參數型別、必填欄位與 enum 都寫清楚，讓模型能穩定選到 `convert_temperature`。
+對應 [Stage 3 — Tool Use & Agent 入門](../../../stages/03-tool-use-and-hello-agent.md) 練習 6。
 
-## 執行方式
+## 為什麼這題重要
+
+Schema 是 **prompt 的一部分**、而且是模型做工具選擇時**最依賴**的 prompt。這題用 `starter_bad` 與 `starter_good` 對照同一題：「把攝氏 32 度換成華氏」。
+
+- **Bad schema**：description 太短、參數都 string、沒 required、沒 enum → LLM 容易把溫度轉換丟給 `process_data`
+- **Good schema**：用途明確、`value: number`、`unit: enum["celsius", "fahrenheit"]`、required 都列好 → 穩定選到 `convert_temperature`
+
+寫 schema 不要只想「人看得懂」、要想「模型能不能用它排除錯誤工具」。
+
+## 怎麼跑 — 兩條路徑
+
+### Path A（默認、本機免費、4 個 starter）
+
+```bash
+pip install -r requirements.txt
+ollama pull qwen2.5:3b
+ollama serve
+
+python starter_bad.py    # 觀察壞 schema 怎麼讓 qwen 挑錯
+python starter_good.py   # 觀察好 schema 怎麼讓 qwen 挑對
+```
+
+預算：**$0**。
+
+### Path B（Anthropic、想看 cloud 高品質）
 
 ```bash
 pip install -r requirements.txt
 export ANTHROPIC_API_KEY=sk-ant-...
-python starter_bad.py
-python starter_good.py
-python test.py
+
+python starter_bad_anthropic.py
+python starter_good_anthropic.py
 ```
 
-`starter_bad.py` 故意保留 anti-pattern：`description` 只有「Process data」和「Convert a value」，LLM 無法判斷邊界。`starter_good.py` 則明確寫出 `process_data` 只適合 JSON 表格摘要，不適合溫度轉換；`convert_temperature` 使用 `value: number` 與 `unit: "celsius" | "fahrenheit"`。
+預算：每次 ≈ **$0.0005**（claude-haiku-4-5、單輪 call）。
 
-## 測試重點
+## 不花錢驗證程式邏輯（mock-based）
 
-`test.py` 用 mock 示範兩種結果：bad schema 會選到錯的 `process_data`，good schema 會選到 `convert_temperature` 並得到 `89.6 fahrenheit`。測試也直接檢查 good schema 有 `required` 與 `enum`，而 bad schema 缺少這些限制。
+```bash
+python test.py            # 驗 Path A (Ollama) starter_bad + starter_good
+python test_anthropic.py  # 驗 Path B (Anthropic) starter_*_anthropic
+```
+
+兩條 test 都用 `unittest.mock`、不打真 API、$0/run。每組 test 都直接檢查 schema 結構（good 有 `required` + `enum`、bad 沒有），不只是看 LLM 怎麼選。
+
+## Bad vs Good schema 對照
+
+| 設計面向 | Bad | Good |
+|---|---|---|
+| Description | "Process data." | "Use only to summarize structured JSON table rows. Do not use for temperature conversion." |
+| 參數型別 | 全部 `string` | `number` / `array` / 對應實際型別 |
+| Required | 無 | `["value", "unit"]` |
+| Enum 收斂 | 無 | `["celsius", "fahrenheit"]` |
+| 失敗回傳 | 簡單字串 | 結構化 dict + retry_hint |
+
+## 兩個 path 的觀察重點（教學重點）
+
+**小 model 對 schema 質量的敏感度比大 model 高**——這題在 Ollama 上**反而更有教學意義**：
+
+| 觀察項 | Anthropic Claude haiku | Ollama qwen2.5:3b |
+|---|---|---|
+| Bad schema 仍能猜對 | 中-高機率 | 低機率（幾乎必錯） |
+| Good schema 選對 | 穩定 | 穩定 |
+| 差距 | 小 | 大 |
+
+換句話說：**寫 schema 的功夫、在小 model 上能省下換大 model 的成本**。Production 想用便宜 model（qwen / mistral）？schema 必須寫到 production-grade。
 
 ## 延伸閱讀
 
-schema 是 prompt 的一部分，而且是模型做工具選擇時最依賴的 prompt。寫 schema 時不要只想「人看得懂」，要想「模型能不能用它排除錯誤工具」。更多規則可以對照 [`resources/schema-design-cheatsheet.md`](../../../resources/schema-design-cheatsheet.md)：清楚用途、正確型別、必填欄位、enum 收斂，以及結構化錯誤回傳。
+更多 schema 設計規則對照 [`resources/schema-design-cheatsheet.md`](../../../resources/schema-design-cheatsheet.md)：清楚用途、正確型別、必填欄位、enum 收斂、結構化錯誤回傳。
 
-## 🦙 Path B — 本機 Ollama（qwen2.5:3b）
+## 延伸
 
-兩個 starter（`starter_bad.py` + `starter_good.py`）的對照邏輯**完全跨 backend**——bad schema 一樣會讓 qwen2.5:3b 挑錯 tool。Ollama 轉換照 [`../03-react-from-scratch/starter.py`](../03-react-from-scratch/starter.py) pattern：
-
-- TOOLS_SPEC 包一層 `{"type": "function", "function": {name, description, parameters}}`
-- response 從 `r.choices[0].message.tool_calls[0].function.name` 抓 tool 選擇
-- `function.arguments` 是 JSON string、`json.loads(...)` 才拿 dict
-
-**反而更有教學意義**：小 model（qwen2.5:3b）對 schema 質量比大 model **更敏感**——壞 schema 在 Claude haiku 上可能還能猜對，在 qwen2.5:3b 上幾乎必錯。**拿這題對照 Anthropic vs Ollama**、最能體會 schema 設計為什麼是 prompt engineering 的核心子題。
+- **故意改壞 good schema**：把一個 enum 拿掉、看 qwen 是否就開始挑錯
+- **加第三個工具**：寫一個跟 `convert_temperature` 用途相近但邊界模糊的 tool、看 LLM 怎麼挑
+- **接 [`../05-error-handling/`](../05-error-handling/) 的 structured error pattern**：結合 schema 設計 + 錯誤處理、production 級

@@ -1,7 +1,19 @@
-"""Mock tests for Stage 3 Exercise 6."""
+"""練習 6 自我驗證 — Path A（Ollama starter_bad.py + starter_good.py）。
+
+跑法：
+    python test.py
+
+驗證內容：
+    - bad schema 在 mock 下可能挑錯 tool（process_data）
+    - good schema 穩定挑到 convert_temperature
+    - good schema 有 required + enum、bad schema 沒有
+
+Anthropic 版本 test 見 test_anthropic.py。
+"""
 
 from __future__ import annotations
 
+import json
 import sys
 from types import SimpleNamespace
 from unittest.mock import MagicMock
@@ -13,52 +25,56 @@ import starter_bad as bad
 import starter_good as good
 
 
-def block_text(text: str):
-    return SimpleNamespace(type="text", text=text)
+def make_tool_call(call_id: str, name: str, args: dict):
+    return SimpleNamespace(
+        id=call_id,
+        type="function",
+        function=SimpleNamespace(name=name, arguments=json.dumps(args)),
+    )
 
 
-def block_tool_use(tool_id: str, name: str, inp: dict):
-    return SimpleNamespace(type="tool_use", id=tool_id, name=name, input=inp)
-
-
-def make_resp(stop_reason: str, *blocks):
-    return SimpleNamespace(stop_reason=stop_reason, content=list(blocks))
+def make_resp(content: str, tool_calls=None, finish_reason: str = "tool_calls"):
+    msg = SimpleNamespace(content=content, tool_calls=tool_calls)
+    return SimpleNamespace(choices=[SimpleNamespace(finish_reason=finish_reason, message=msg)])
 
 
 def test_bad_schema_can_select_wrong_tool():
+    """模糊 schema 下、LLM 把溫度轉換誤丟給 process_data。"""
     client = MagicMock()
-    client.messages.create.return_value = make_resp(
-        "tool_use",
-        block_text("The schemas are vague, so I will process the text."),
-        block_tool_use("t1", "process_data", {"data": "32 Celsius to Fahrenheit"}),
+    client.chat.completions.create.return_value = make_resp(
+        "The schemas are vague, so I will process the text.",
+        [make_tool_call("t1", "process_data", {"data": "32 Celsius to Fahrenheit"})],
     )
     result = bad.select_and_run("Convert 32 Celsius to Fahrenheit.", client=client)
     assert result["tool"] == "process_data"
     assert "processed generic data" in result["observation"]
+    print("✅ test_bad_schema_can_select_wrong_tool")
 
 
 def test_good_schema_selects_temperature_tool():
     client = MagicMock()
-    client.messages.create.return_value = make_resp(
-        "tool_use",
-        block_text("This is clearly a temperature conversion."),
-        block_tool_use("t1", "convert_temperature", {"value": 32, "unit": "celsius"}),
+    client.chat.completions.create.return_value = make_resp(
+        "This is clearly a temperature conversion.",
+        [make_tool_call("t1", "convert_temperature", {"value": 32, "unit": "celsius"})],
     )
     result = good.select_and_run("Convert 32 Celsius to Fahrenheit.", client=client)
     assert result["tool"] == "convert_temperature"
     assert result["observation"] == {"value": 89.6, "unit": "fahrenheit"}
+    print("✅ test_good_schema_selects_temperature_tool")
 
 
 def test_good_schema_has_required_fields_and_enum():
-    bad_temp = next(tool for tool in bad.TOOLS_SPEC if tool["name"] == "convert_temperature")
-    good_temp = next(tool for tool in good.TOOLS_SPEC if tool["name"] == "convert_temperature")
-    assert "required" not in bad_temp["input_schema"]
-    assert good_temp["input_schema"]["required"] == ["value", "unit"]
-    assert good_temp["input_schema"]["properties"]["unit"]["enum"] == ["celsius", "fahrenheit"]
+    """直接檢查 schema 結構：good 有 required + enum、bad 沒有。"""
+    bad_temp = next(t for t in bad.TOOLS_SPEC if t["function"]["name"] == "convert_temperature")
+    good_temp = next(t for t in good.TOOLS_SPEC if t["function"]["name"] == "convert_temperature")
+    assert "required" not in bad_temp["function"]["parameters"]
+    assert good_temp["function"]["parameters"]["required"] == ["value", "unit"]
+    assert good_temp["function"]["parameters"]["properties"]["unit"]["enum"] == ["celsius", "fahrenheit"]
+    print("✅ test_good_schema_has_required_fields_and_enum")
 
 
 if __name__ == "__main__":
     test_bad_schema_can_select_wrong_tool()
     test_good_schema_selects_temperature_tool()
     test_good_schema_has_required_fields_and_enum()
-    print("all pass")
+    print("\n🎉 全部通過 — Ollama path bad / good schema 對照邏輯正確")
