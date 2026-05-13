@@ -492,14 +492,39 @@ You are a senior code reviewer. When invoked:
 
 ---
 
-## 5.6 — Harness Internals（agent runtime 的內部結構）⭐ Track B 必看
+## 5.6 — Harness Internals = Harness Engineering 入門 ⭐ Track B 必看
 
-到 5.5 為止你會**用** Subagent 了，但**沒看過 Claude Code 內部到底怎麼跑 agent loop**。本節打開引擎蓋——production agent 不是「LLM + tool」那麼簡單，中間還有一整套 runtime 層處理 dispatch / context / safety / retry / telemetry。Claude Code 本身就是一個高完成度的 reference harness，所以放在 Stage 5、不在 Stage 4（framework 之上的視角）或 Stage 7（deploy 之下的視角）。
+> **本節主題就是業界講的「harness engineering」**——把 LLM 包成 production agent 系統的 runtime 工程學。**Harness Engineering** 是 2025 年才開始被廣泛使用的詞、來自 Anthropic / Cursor / Cognition 等 AI coding tool 團隊的工程實踐共識。
+
+### Harness Engineering 是什麼（先定位）
+
+**Harness = 把 LLM agent 包成 production 系統的「工具帶」runtime 層**。一個 production agent 不是「LLM + tool」那麼簡單、中間還有一整套 runtime 處理：
+
+| 元件 | 做什麼 |
+|---|---|
+| **Agent loop** | 把「LLM 回 tool_use → 跑 tool → result append → 再叫 LLM」迴圈包成穩定流程 |
+| **Tool registry** | 動態 tool dispatch、permission gate、sandboxing |
+| **Context manager** | message history 管理、context window 控制、auto-compact |
+| **Safety layer** | permission prompts、sandboxed exec、destructive op 攔截 |
+| **Retry / recovery** | tool fail 時怎麼處理（exception vs LLM 自己看 error 反思）|
+| **Telemetry** | metrics、logging、token counting、trace export |
+
+**Framework vs Harness 的關鍵差別**：
+- **Framework**（Stage 4 LangGraph / CrewAI）規範 **API** — 你呼叫的介面長什麼樣
+- **Harness**（本節）規範 **runtime** — 怎麼跑、怎麼 recovery、怎麼觀測
+
+**為什麼本節在 Stage 5、不在 Stage 4 / Stage 7**：
+- Stage 4 教「**用**」framework 的視角（抽象層之上）
+- Stage 7 教 production 的 eval / observability / deploy（抽象層之下）
+- **本節在中間** — runtime 內部解剖。**Claude Code 本身就是一個高完成度的 reference harness**、所以放在 Claude Code stage
+
+到 5.5 為止你會**用** Subagent 了、但**沒看過 Claude Code 內部到底怎麼跑 agent loop**。本節打開引擎蓋。
 
 ### 學習目標
 
 完成本節後你會：
-- 講得出「agent harness 由哪些部分組成」（loop / tool registry / context manager / safety layer / telemetry）並對應到 Claude Code 哪裡
+- **解釋 harness engineering 是什麼**——以及為什麼這個詞 2025 後段才被業界廣泛使用（agent runtime 複雜度真正 production-ready 才 surface）
+- 講得出 agent harness 的 6 個核心元件（loop / tool registry / context manager / safety layer / retry / telemetry）並對應到 Claude Code 哪裡
 - 看得懂 `claude-agent-sdk-python` source 的 main loop（不是逐行、是抓得到主幹）
 - 講得清楚 **framework（Stage 4）vs harness 差在哪**：framework 規範 **API**（你呼叫的介面），harness 規範 **runtime**（怎麼跑、怎麼 recovery、怎麼觀測）
 
