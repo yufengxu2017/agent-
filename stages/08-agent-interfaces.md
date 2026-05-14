@@ -149,7 +149,7 @@ agent 收到任務
 - **跨多個 OS**：Ubuntu / Windows / macOS 都有
 - **跨應用 chain**：常要打開 3-4 個 app（Excel → Chrome → Slack）
 
-**Why 真實能力 ≠ 數字**（呼應 [Stage 7 §reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape2026-05-最新--reward-hacking-警告)）：
+**Why 真實能力 ≠ 數字**（呼應 [Stage 7 §reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告)）：
 - OSWorld 也在 [UC Berkeley 2026-04 reward-hacking 報告](https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/) 名單上、被證可 hack 到 100%
 - **看數字紀律**：別只看 leaderboard top、看你自己 use case 的 hold-out test 才是 ground truth
 
@@ -438,7 +438,7 @@ agent = Agent(
 | **③ Human-in-loop** | long-horizon task 中段 checkpoint | task > 10 steps 或 > 5 分鐘 |
 | **④ Output filter** | destination 限定白名單（only post to internal Slack、only write to /tmp）| 跨 system 操作的 agent |
 
-→ **呼應 [Stage 7 §reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape2026-05-最新--reward-hacking-警告)**：curriculum 一致教「**別 blindly 信 agent**」紀律——Stage 7 講 eval 紀律、Stage 8 講 runtime 紀律。
+→ **呼應 [Stage 7 §reward-hacking 警告](07-multi-agent-production.md#-agent-benchmark-landscape怎麼看不要只看排行榜---reward-hacking-警告)**：curriculum 一致教「**別 blindly 信 agent**」紀律——Stage 7 講 eval 紀律、Stage 8 講 runtime 紀律。
 
 ## 🛠 動手練習（兩 track 各有）
 

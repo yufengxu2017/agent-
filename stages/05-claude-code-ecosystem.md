@@ -496,16 +496,16 @@ You are a senior code reviewer. When invoked:
 
 ## 5.6 — Claude Code Source 解剖（reference harness implementation）⭐ Track B 必看
 
-> **本節定位**：本節**不是** harness engineering 的 discipline 概念教學——discipline 級的定義 / **8 元件** / prompt→context→harness 三層 lineage 是 **[Stage 7 §Harness Engineering](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念)** 在講。**本節是 case study**——拿 Claude Code（一個 production-grade reference harness）的 source code 來解剖、把 Stage 7 列的 8 個元件**中前 6 個 runtime-internal 元件**（Eval / Cost-Latency 兩個是 cross-cutting、不在 source 主 loop）**在實作裡找到對應位置**。
+> **本節定位**：本節**不是** harness engineering 的 discipline 概念教學——discipline 級的定義 / **8 元件** / prompt→context→harness 三層 lineage 是 **[Stage 7 §Harness Engineering](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程設計--本-stage-核心概念)** 在講。**本節是 case study**——拿 Claude Code（一個 production-grade reference harness）的 source code 來解剖、把 Stage 7 列的 8 個元件**中前 6 個 runtime-internal 元件**（Eval / Cost-Latency 兩個是 cross-cutting、不在 source 主 loop）**在實作裡找到對應位置**。
 
 ### 學習目標
 
 完成本節後你會：
 - 看得懂 `claude-agent-sdk-python` source 的 main loop（不是逐行、是抓得到主幹）
-- 在 source 裡標出 [Stage 7 列的 8 個 harness 元件](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念)**中**前 6 個 runtime-internal 元件（agent loop / tool registry（agent 可呼叫工具的清單 + 介面定義） / context manager / safety layer / retry / telemetry）各自的 file:line。Stage 7 列的第 7 個 Eval 是外掛、第 8 個 Cost / Latency 是 cross-cutting、不在 source 主 loop 內、不在本練習範圍
+- 在 source 裡標出 [Stage 7 列的 8 個 harness 元件](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程設計--本-stage-核心概念)**中**前 6 個 runtime-internal 元件（agent loop / tool registry（agent 可呼叫工具的清單 + 介面定義） / context manager / safety layer / retry / telemetry）各自的 file:line。Stage 7 列的第 7 個 Eval 是外掛、第 8 個 Cost / Latency 是 cross-cutting、不在 source 主 loop 內、不在本練習範圍
 - 講得出 Claude Code 的 agent loop 跟 Stage 3 練習 3 from-scratch ReAct 差在哪——production-grade 多了哪些東西
 
-> **discipline 級概念在哪**：harness engineering 是什麼 / framework vs harness 差別 / prompt→context→harness 三層 lineage → 全部見 **[Stage 7 §Harness Engineering](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念)**。本節只負責 Claude Code source 的 case study。
+> **discipline 級概念在哪**：harness engineering 是什麼 / framework vs harness 差別 / prompt→context→harness 三層 lineage → 全部見 **[Stage 7 §Harness Engineering](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程設計--本-stage-核心概念)**。本節只負責 Claude Code source 的 case study。
 
 ### 📚 必修閱讀
 
@@ -521,7 +521,7 @@ You are a senior code reviewer. When invoked:
 **步驟**：
 1. **clone**：`git clone https://github.com/anthropics/claude-agent-sdk-python`
 2. **定位 agent loop**：找出 `_internal/client.py` 裡實際發出 LLM call、收 tool_use response、dispatch 給 tool runner 的核心 loop。提示：找 `async def` 跟 `tool_use_id` 關鍵字
-3. **標出前 6 個 runtime-internal harness 元件**在 source 裡的位置（檔名 + 行號）——對應 [Stage 7 列的 8 元件](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念)的前 6 個（第 7 個 Eval 外掛 / 第 8 個 Cost-Latency cross-cutting 不在 source 主 loop）：
+3. **標出前 6 個 runtime-internal harness 元件**在 source 裡的位置（檔名 + 行號）——對應 [Stage 7 列的 8 元件](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程設計--本-stage-核心概念)的前 6 個（第 7 個 Eval 外掛 / 第 8 個 Cost-Latency cross-cutting 不在 source 主 loop）：
    - (a) **Agent loop**：實際發出 LLM call + 收 response 的迴圈在哪
    - (b) **Tool registry / dispatch**：LLM 回 tool_use → 怎麼 route 到對應 tool 實作
    - (c) **Context manager**：tool result 怎麼寫回 message history、context window 控制 / auto-compact
@@ -558,7 +558,7 @@ You are a senior code reviewer. When invoked:
 - [ ] 寫一份能在特定觸發詞自動載入的 `SKILL.md`
 - [ ] 把 skill 打包成 plugin，再用 `marketplace.json` 發佈
 - [ ] **寫過 `.claude/agents/` 自訂 subagent 並從 Task tool invoke 過**
-- [ ] **讀過 `claude-agent-sdk-python` 的 main loop、能在 source 裡標出 [Stage 7 列的 8 個 harness 元件](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程學--本-stage-核心概念) 的前 6 個 runtime-internal 元件**位置（§5.6 練習）
+- [ ] **讀過 `claude-agent-sdk-python` 的 main loop、能在 source 裡標出 [Stage 7 列的 8 個 harness 元件](07-multi-agent-production.md#-harness-engineering--production-agent-runtime-的工程設計--本-stage-核心概念) 的前 6 個 runtime-internal 元件**位置（§5.6 練習）
 - [ ] 從角色分工說出 MCP / Skills / Plugins / Subagents / SDK 各自的位置
 
 如果都可以 → 前往 [Stage 6 — Memory & RAG](06-memory-rag.md)。
