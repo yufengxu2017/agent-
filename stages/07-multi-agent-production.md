@@ -56,19 +56,7 @@
 
 **Multi-agent 不是 default、是任務真的需要時才上的設計**。多數場景應先嘗試 simple workflow 或 single agent；**只有在任務天然可分解、需要平行探索、單一 context 不夠、或需要明確角色分工時，multi-agent 才值得引入**。硬上會付 **3-10× token、debug 困難、context fragmentation（context 被切散在多個 agent、彼此看不到全貌）嚴重**。
 
-| 立場 | 來源 | 核心論點 |
-|---|---|---|
-| **Anthropic** | [Building Effective Agents (2024)](https://www.anthropic.com/engineering/building-effective-agents)、[How we built our multi-agent research system (2025)](https://www.anthropic.com/engineering/built-multi-agent-research-system) | multi-agent 適合**高價值、可平行探索、需要大量工具或超出單一 context 的任務**；token 使用量可能比 single chat 高很多倍 |
-| **Cognition** | [Don't Build Multi-Agents (2025)](https://cognition.ai/blog/dont-build-multi-agents) | multi-agent 的 context fragmentation 嚴重、shared state 維護痛苦；先窮盡 single-agent + long-context 才考慮 |
-
-**4 個明確訊號**才上 multi-agent（詳見 [Stage 4 什麼時候真的需要 multi-agent](04-agent-frameworks.md#什麼時候真的需要-multi-agent不要硬上)）：
-
-1. **任務天然分解** — 大任務有清楚子步驟、能 step-by-step 完成 → Sequential / Planner-Executor
-2. **Token explosion** — single agent prompt 塞不下所有 tool description / context → Supervisor-Worker
-3. **角色衝突** — 同一個 LLM 既當 writer 又當 critic 會 self-justify → Debate / Peer review
-4. **平行加速** — 3 個 research 子任務同時跑、wall-clock 1/3 → Parallel / Map-Reduce
-
-**4 個信號都不在？** → single agent + 好 prompt + tool use 就夠、別硬上 multi-agent。**本 stage 的 harness engineering 部分（8 個元件 / eval / observability）即使你最後用 single agent 也都會用到**——所以即使你決定不走 multi-agent、本 stage 仍是必修。
+> 📌 **決策框架的 canonical 在 Stage 4**：完整的 Anthropic / Cognition 立場對照 + 4 個「該上 multi-agent」訊號 + 每個訊號對應的 pattern，見 [Stage 4 §什麼時候真的需要 multi-agent](04-agent-frameworks.md#什麼時候真的需要-multi-agent不要硬上)（設計階段決策）。本節只做 production 前的最後回頭檢查——**4 個訊號一個都不在？** → single agent + 好 prompt + tool use 就夠、別硬上 multi-agent。**本 stage 的 harness engineering 部分（8 個元件 / eval / observability）即使你最後用 single agent 也都會用到**——所以即使你決定不走 multi-agent、本 stage 仍是必修。
 
 ## 📌 學習目標
 
