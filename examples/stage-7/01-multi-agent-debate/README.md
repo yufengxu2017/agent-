@@ -17,11 +17,7 @@
 
 3 個 agent（PRO + CON + Judge）對同問題辯論：
 
-```
-            ┌────── PRO agent ──────┐
-question ──>│ ├──> Judge ──> WINNER
-            └────── CON agent ──────┘
-```
+![Multi-agent debate：PRO / CON / Judge](../../../resources/diagrams/multi-agent-debate-flow.png)
 
 PRO 跟 CON **獨立** call、互不看到對方論點（避免 bias propagation）；Judge 看完兩邊再裁決。
 

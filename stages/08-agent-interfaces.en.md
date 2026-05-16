@@ -409,27 +409,7 @@ In March 2026, a US federal judge issued a preliminary injunction against Comet,
 
 ### 4 Must-Have Defensive Patterns
 
-```
-                    ┌──── User Request ────┐
-                    ▼ │
-              ┌──── Agent ────┐ │
-              │ │ │
-   ┌─① approval gate │ │
-   │ (User confirms before high-risk actions)│ │
-   │ │ │
-   │ ┌─② sandbox ──┐ │ │
-   │ │ Agent runs code here │ │ │
-   │ └──────────────┘ │ │
-   │ │ │
-   │ ┌─③ human-in-loop ─┐ │ │
-   │ │ Mid-task check for long tasks │ │
-   │ └──────────────────┘ │ │
-   │ │ │
-   │ ┌─④ output filter ──┐ │ │
-   │ │ Whitelist destinations ││ │
-   │ └────────────────────┘ ▼ │
-   └─────────────────► Execution ───────────┘
-```
+![Agent — 4 must-have defensive patterns](../resources/diagrams/agent-guardrail-patterns.en.png)
 
 | Pattern | How to Implement | When it's a Must |
 |---|---|---|

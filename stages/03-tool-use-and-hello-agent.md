@@ -16,22 +16,7 @@
 
 ### 一張階層圖先建立認知
 
-```
-AI (Artificial Intelligence、人工智慧)
- └── ML (Machine Learning、機器學習) ─ 用資料學
-      └── DL (Deep Learning、深度學習) ─ 用神經網路
-           └── LLM (Large Language Model、大型語言模型)
-                                    └─ 文字 in、文字 out 的超大神經網路
-
-   ┌──────────────────────────────────────────────────────────┐
-   │ Agent (智能體 / 代理人) = 跨層 system，把 LLM 包進 │
-   │ 工具呼叫迴圈 │
-   │ = LLM（當大腦）+ Tools（手腳）+ Loop（心跳） │
-   └──────────────────────────────────────────────────────────┘
-                          ▲
-                          │ 用 LLM 當其中一個元件
-                          │（不是 LLM 的「子類型」）
-```
+![AI / ML / DL / LLM 與 Agent 的關係](../resources/diagrams/ai-ml-llm-agent-hierarchy.png)
 
 → **「Agent」不是「比 LLM 更厲害的模型」，也不是 LLM 樹狀分類底下的一個分支**。Agent 是個**跨層抽象的系統**，把 LLM 當作其中一個元件來用。Cursor / Claude Code / Hermes Agent 內部都還是同一批 LLM（Claude / GPT / Gemini）—— 差別是怎麼把 LLM 包進工具呼叫迴圈裡。
 

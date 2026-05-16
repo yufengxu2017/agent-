@@ -16,22 +16,7 @@
 
 ### A Hierarchy Diagram to Establish Understanding
 
-```
-AI (Artificial Intelligence)
- └── ML (Machine Learning) ─ Learns from data
-      └── DL (Deep Learning) ─ Uses neural networks
-           └── LLM (Large Language Model)
-                                    └─ A massive neural network with text in, text out
-
-   ┌──────────────────────────────────────────────────────────┐
-   │ Agent = A cross-layer system that wraps an LLM in a │
-   │ tool-calling loop. │
-   │ = LLM (the brain) + Tools (hands) + Loop (heartbeat) │
-   └──────────────────────────────────────────────────────────┘
-                          ▲
-                          │ Uses an LLM as one component
-                          │ (Not a "subtype" of LLM)
-```
+![AI / ML / DL / LLM vs. Agent](../resources/diagrams/ai-ml-llm-agent-hierarchy.en.png)
 
 → **An "Agent" is not a "more advanced model than an LLM," nor is it a branch under the LLM classification tree**. An agent is a **cross-layer abstract system** that uses an LLM as one of its components. Cursor / Claude Code / Hermes Agent all use the same LLMs internally (Claude / GPT / Gemini)—the difference is how they wrap the LLM in a tool-calling loop.
 
