@@ -98,11 +98,11 @@ You typically need multi-agent when one of these four signals appears:
 
 > **This section is on a different level than the 5 patterns above**: The 5 patterns are design choices that can be implemented with or without a framework. The **Claude Code subagent** introduced here is another execution model (built-in runtime orchestration, no framework code). After reading about the 5 patterns, this section shows you "there's a second path for multi-agent."
 
-**Frameworks aren't the only way to do multi-agent.** Anthropic's own Claude Code offers another layer of abstraction: the [subagent](05-claude-code-ecosystem.en.md#55--subagents-native-multi-agent-in-claude-code-new-in-2025). You create a subagent by writing a `.claude/agents/<name>.md` file—**no framework required**.
+**Frameworks aren't the only way to do multi-agent.** Anthropic's own Claude Code offers another layer of abstraction: the [subagent](05-claude-code-ecosystem.en.md#55--subagents-claude-codes-native-multi-agent-mechanism--2025-new-feature). You create a subagent by writing a `.claude/agents/<name>.md` file—**no framework required**.
 
 The fundamental difference from the framework path (in one line): the **framework path** is cross-LLM-provider, written as Python orchestration code, with full checkpointing / audit trail; **Claude Code subagent** runs only inside the Claude Code runtime, written as markdown not code, with built-in context isolation.
 
-> 📌 **The full dimension-by-dimension comparison table (startup / runtime / context isolation / provider lock-in / learning curve) lives canonically at [Stage 5.5](05-claude-code-ecosystem.en.md#55--subagents-native-multi-agent-in-claude-code-new-in-2025)** — this stage only needs you to know "there's a second, Claude-Code-native path"; see 5.5 for the per-item implementation differences.
+> 📌 **The full dimension-by-dimension comparison table (startup / runtime / context isolation / provider lock-in / learning curve) lives canonically at [Stage 5.5](05-claude-code-ecosystem.en.md#55--subagents-claude-codes-native-multi-agent-mechanism--2025-new-feature)** — this stage only needs you to know "there's a second, Claude-Code-native path"; see 5.5 for the per-item implementation differences.
 
 **When to choose subagents over a framework**:
 - You're already using Claude Code for your daily work.
@@ -110,7 +110,7 @@ The fundamental difference from the framework path (in one line): the **framewor
 - You want to run multiple subagents in parallel (research / write / critic) to save wall-clock time.
 - You don't need cross-provider migration.
 
-For detailed implementation and hands-on exercises, see [Stage 5.5](05-claude-code-ecosystem.en.md#55--subagents-native-multi-agent-in-claude-code-new-in-2025) (**it's recommended to complete Stage 5.1 on Claude Code basics before tackling 5.5**—subagents are an advanced feature of the ecosystem and require familiarity with the basics).
+For detailed implementation and hands-on exercises, see [Stage 5.5](05-claude-code-ecosystem.en.md#55--subagents-claude-codes-native-multi-agent-mechanism--2025-new-feature) (**it's recommended to complete Stage 5.1 on Claude Code basics before tackling 5.5**—subagents are an advanced feature of the ecosystem and require familiarity with the basics).
 
 ### What Frameworks Do
 
@@ -139,7 +139,7 @@ Frameworks abstract away the orchestration boilerplate for the 5 patterns above 
 > 2. **Run a framework quickstart** (2-3 hr) — Pick either LangGraph or CrewAI and run their official multi-agent tutorial.
 > 3. **Cross-reference with Anthropic's Cookbook `customer_service_agent`** (1 hr) — A production-style routing + handoff example.
 > 4. *(Optional)* **Dive into the academic side**: Pick 1-2 papers to read (AutoGen / CAMEL / ChatDev / Generative Agents).
-> 5. *(Optional for Claude users)* **Write a subagent for comparison**: See [Stage 5.5](05-claude-code-ecosystem.en.md#55--subagents-native-multi-agent-in-claude-code-new-in-2025) and compare it to the framework approach.
+> 5. *(Optional for Claude users)* **Write a subagent for comparison**: See [Stage 5.5](05-claude-code-ecosystem.en.md#55--subagents-claude-codes-native-multi-agent-mechanism--2025-new-feature) and compare it to the framework approach.
 >
 > **You don't need to read all 5 papers.** Pick the 1-2 that are most relevant to your use case.
 
