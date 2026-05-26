@@ -74,7 +74,7 @@ python test_anthropic.py # 3 個 test（含 429 rate limit）
 
 `fastapi.TestClient` 用 in-process ASGI、不開真 port、不用 docker。
 
-## Production-grade 必備
+## Production 必備
 
 | 元素 | 為什麼 | 在這份 starter |
 |---|---|---|

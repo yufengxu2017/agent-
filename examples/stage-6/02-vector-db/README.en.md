@@ -83,7 +83,7 @@ collection.delete(ids=[...])
 - **Filter confusion**: `where={"category": "tech"}` is metadata; `where_document={"$contains": "..."}` is content
 - **Inconsistent embedding function**: indexing with model A and querying with model B breaks retrieval. Chroma binds embedding_function to the collection to prevent this
 
-## Production-grade
+## Production-ready alternatives
 
 ```bash
 # Persistent

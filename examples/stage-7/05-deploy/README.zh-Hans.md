@@ -62,7 +62,7 @@ python test.py             # 5 个 test、用 fastapi.TestClient
 python test_anthropic.py   # 3 个 test（含 429 rate limit）
 ```
 
-## Production-grade 必备
+## Production 必备
 
 | 元素 | 为什么 | 在这份 starter |
 |---|---|---|

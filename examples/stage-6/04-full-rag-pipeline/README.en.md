@@ -107,7 +107,7 @@ Answer:"""
 - **Context after the question**: LLMs weight the start of the prompt more; put context first
 - **No eval for "say unknown when you can't answer"**: production needs 5-10 eval cases for this
 
-## Production-grade RAG
+## Production-ready RAG
 
 - **Persistent ChromaDB**: `chromadb.PersistentClient(path=...)` to skip re-indexing
 - **Reranker**: retrieve top-20, cross-encoder rerank, keep top-3

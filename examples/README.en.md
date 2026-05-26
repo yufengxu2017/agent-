@@ -184,7 +184,7 @@ r = client.chat.completions.create(model="meta/llama-3.3-70b-instruct", messages
 | **All local Ollama** | ~30 hr (CPU) / ~10 hr (GPU) | **$0** | Budget-conscious, privacy needs, China-mainland no-cloud-access |
 | **Mixed: local practice + haiku final review** ⭐ | ~30 hr | **$2-5** | **Recommended default** — practice locally, run final 1-2 iterations on haiku to see cloud quality |
 | **All haiku** | ~10 hr | $5-15 | Want speed, budget allows, want full cloud experience |
-| **All sonnet** | ~8 hr | $20-50 | Production-grade practice, want high-quality answers |
+| **All sonnet** | ~8 hr | $20-50 | Deep practice with higher-quality answers, want high-quality answers |
 | **Mixed: sonnet + opus on hard problems** | ~8 hr | $30-80 | Already a production agent developer |
 
 > 🎯 **Beginner default**: run everything locally first; cap budget at $5. **Only consider upgrading to sonnet at the Stage 7 production tier.**
