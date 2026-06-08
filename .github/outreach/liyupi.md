@@ -1,5 +1,7 @@
 # Outreach: liyupi/ai-guide
 
+> ⚠️ **Send content is now canonical in [`_send-day-packages.md`](_send-day-packages.md)** (package D — current numbers: 8 stages / 240+ resources). This file is kept for positioning rationale; do not paste its older entry/stats blocks directly.
+
 > **Status**: not contacted · **Channel**: GitHub PR
 > **Primary lang**: zh-Hans
 > **Last updated**: 2026-05-09

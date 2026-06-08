@@ -1,5 +1,7 @@
 # Outreach: Datawhale (datawhalechina)
 
+> ⚠️ **Send content is now canonical in [`_send-day-packages.md`](_send-day-packages.md)** (package E — current numbers: 8 stages / 240+ resources). This file is kept for positioning rationale; do not paste its older issue/stats blocks directly.
+
 > **Status**: not contacted · **Channel**: GitHub issue + (later) WeChat group
 > **Primary lang**: zh-Hans
 > **Last updated**: 2026-05-09

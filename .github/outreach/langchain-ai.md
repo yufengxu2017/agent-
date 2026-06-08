@@ -1,5 +1,7 @@
 # Outreach: LangChain ecosystem (langchain-ai / kyrolabs/awesome-langchain)
 
+> ⚠️ **Send content is now canonical in [`_send-day-packages.md`](_send-day-packages.md)** (package C — current numbers: 8 stages / 240+ resources). This file is kept for positioning rationale; do not paste its older entry/stats blocks directly.
+
 > **Status**: not contacted · **Channel**: GitHub PR
 > **Primary lang**: en (with zh as bonus)
 > **Last updated**: 2026-05-26 (refreshed — stats, 8-stage structure, correct section target)
