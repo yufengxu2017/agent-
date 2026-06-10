@@ -2,7 +2,7 @@
 
 > [繁體中文](./mcp-skills-catalog.md) | [简体中文](./mcp-skills-catalog.zh-Hans.md) | **English**
 
-> Connect Claude Code (or any other CLI agent) to the apps you already use, without window-hopping. This page is a curated index of 62 MCP servers / Claude Skills / integrations grouped by use case (incl. research-workflow + multi-LLM-delegation dedicated sections).
+> Connect Claude Code (or any other CLI agent) to the apps you already use, without window-hopping. This page is a curated index of 65+ MCP servers / Claude Skills / integrations grouped by use case (incl. research-workflow + multi-LLM-delegation dedicated sections).
 
 ---
 
