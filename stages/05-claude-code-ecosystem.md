@@ -304,6 +304,8 @@ MCP / Skills 是「給 agent 更多能力」；**Hooks 則是反過來：在 age
 | [21st-dev/magic-mcp](https://github.com/21st-dev/magic-mcp) | ⭐⭐⭐ | 做完練習 2 找靈感 | 會生成 UI 元件的非平凡 MCP server、★ 4.8k+、NOASSERTION。**看 MCP 不只能做資料抓取** |
 | [yamadashy/repomix](https://github.com/yamadashy/repomix) | ⭐⭐⭐⭐⭐ | 把整個 codebase 餵給 LLM | ★ 24k+ MIT、把 repo packed 成 AI-friendly 單一檔案、含 MCP server mode + tree-sitter 壓縮（省 70% token）+ secretlint 過濾密鑰。**daily-driver 工具，搭 Claude Code / Codex 用** |
 
+> 🔭 **MCP 在 2026：從「知道是什麼」到「會用生態」**：(1) **官方 Registry**（registry.modelcontextprotocol.io）——發現 / 發佈 MCP server 的中央目錄；(2) **FastMCP**（[jlowin/fastmcp](https://github.com/jlowin/fastmcp)、★25k）——用 `@mcp.tool` 幾行寫出 server，比 low-level SDK 省事；(3) ⚠️ **MCP 安全**：tool 回傳的內容是**不可信輸入**（tool poisoning、confused-deputy），別把沒檢查過的第三方 server 接上有權限的 agent。
+
 ---
 
 ## 5.3 — Skills（Claude Code 的行為層）⭐ Claude Code 生態最關鍵的一層

@@ -480,7 +480,7 @@
 
 | 栏位 | 内容 |
 |---|---|
-| Stars | ★ 32k+ |
+| Stars | ★ 34k+ |
 | License | Apache-2.0 |
 | 推荐度 | ⭐⭐⭐⭐⭐（**Microsoft 官方**） |
 

@@ -478,7 +478,7 @@
 
 | 欄位 | 內容 |
 |---|---|
-| Stars | ★ 32k+ |
+| Stars | ★ 34k+ |
 | License | Apache-2.0 |
 | 推薦度 | ⭐⭐⭐⭐⭐（**Microsoft 官方**） |
 

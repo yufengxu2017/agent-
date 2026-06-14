@@ -304,6 +304,8 @@ MCP / Skills give the agent *more* abilities; **Hooks are the reverse: you attac
 | [21st-dev/magic-mcp](https://github.com/21st-dev/magic-mcp) | ⭐⭐⭐ | Finding inspiration after Exercise 2 | A non-trivial MCP server that generates UI components, ★ 4.8k+, NOASSERTION. **Shows that MCP can do more than just data fetching.** |
 | [yamadashy/repomix](https://github.com/yamadashy/repomix) | ⭐⭐⭐⭐⭐ | Feeding an entire codebase to an LLM | ★ 24k+, MIT. Packs a repo into a single AI-friendly file, with MCP server mode + tree-sitter compression (~70% token savings) + secretlint to filter secrets. **Daily-driver tool to pair with Claude Code / Codex.** |
 
+> 🔭 **MCP in 2026: from "knowing what it is" to "using the ecosystem"**: (1) the **official Registry** (registry.modelcontextprotocol.io), a central place to discover/publish MCP servers; (2) **FastMCP** ([jlowin/fastmcp](https://github.com/jlowin/fastmcp), ★25k), which writes a server in a few `@mcp.tool` lines instead of the low-level SDK; (3) ⚠️ **MCP security**: a tool's results are **untrusted input** (tool poisoning, confused-deputy), so do not attach an unvetted third-party server to a permissioned agent.
+
 ---
 
 ## 5.3 — Skills (Claude Code's Behavior Layer) ⭐ The most critical layer of the Claude Code ecosystem
