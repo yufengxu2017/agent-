@@ -6,6 +6,10 @@ Format: `YYYY-MM-DD · category · 1-line summary (commit-sha)`.
 
 ---
 
+## 2026-06-28
+
+- **content** · Stage 1 model table + glossary (frontier + Context-Window entries) + `scripts/freshness-models.yml` whitelist refreshed with late-June-2026 frontier models, all first-party verified: GPT row gains GPT-5.6 (Sol / Terra / Luna, **preview**); Gemini row → 3.5 Flash (3.5 Pro in dev); glossary frontier adds xAI Grok 4.3 (GA) + Mistral Medium 3.5 (open weights, preview), relabeled by half-month (Fable 5 suspension note retained). Preview-vs-GA marked; no fabricated benchmark / context numbers. Tri-locale; anchor / zh-Hans / switcher gates pass.
+
 ## 2026-06-24
 
 - **catalog** · Added DeusData/codebase-memory-mcp (★ 13.5k, MIT) to §5 Dev Collaboration — a code-intelligence MCP that indexes a codebase into a queryable knowledge graph (query structure / symbols / call paths instead of grep+read). Plain, non-marketing description (notes the re-index-after-edits + verify-load-bearing-claims caveats); tri-locale; §5 TOC count 7→9 (also corrects a pre-existing off-by-one); gates pass.
