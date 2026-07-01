@@ -89,7 +89,7 @@ Editor-integrated AI pair-programming tool. Widely adopted in AI editor tools an
 **2. Aider Git-Native Flow (closest "pair with AI" experience)**
 ```bash
 # Inside the repo
-aider --model anthropic/claude-sonnet-4-20250514
+aider --model anthropic/claude-sonnet-5
 
 # Natural-language ask
 > Add a timezone parameter to parse_date in utils.py, default UTC

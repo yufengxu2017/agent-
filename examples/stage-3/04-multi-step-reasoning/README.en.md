@@ -84,7 +84,7 @@ This is precisely the teaching point of Exercise 4 — **same ReAct loop, differ
 Default is `claude-haiku-4-5` (cheapest). Try Sonnet:
 
 ```bash
-MODEL=claude-sonnet-4-6 python starter_anthropic.py
+MODEL=claude-sonnet-5 python starter_anthropic.py
 ```
 
 Or on the Ollama path, swap to a larger model:

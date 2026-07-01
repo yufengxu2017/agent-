@@ -13,7 +13,7 @@ current_frontier_models:
   # 2026-05 frontier list (review quarterly)
   anthropic:
     - "Opus 4.8"
-    - "Sonnet 4.6"
+    - "Sonnet 5"
     - "Haiku 4.5"
   openai:
     - "GPT-5.6"

@@ -92,7 +92,7 @@ python test.py
 Default model is `claude-haiku-4-5` (cheapest). Switch to Sonnet:
 
 ```bash
-MODEL=claude-sonnet-4-6 python starter.py
+MODEL=claude-sonnet-5 python starter.py
 ```
 
 Or change `MODEL = ...` in `starter.py`.

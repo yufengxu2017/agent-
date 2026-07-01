@@ -64,7 +64,7 @@ LLMs see **tokens** (sub-word units), not characters. Roughly 1 English word ≈
 
 ### Context Window
 
-The maximum tokens an LLM can "see" in one call. **2026 frontier**: Claude Sonnet 4.6 / Opus 4.8 1M, GPT-5.6 (preview) ~400k, Gemini 3.5 Flash 1M (Pro series up to 2M), xAI Grok 4.3 1M, Mistral Medium 3.5 256k. **Bigger isn't always better** — beyond a length the LLM gets "Lost in the Middle".
+The maximum tokens an LLM can "see" in one call. **2026 frontier**: Claude Sonnet 5 / Opus 4.8 1M, GPT-5.6 (preview) ~400k, Gemini 3.5 Flash 1M (Pro series up to 2M), xAI Grok 4.3 1M, Mistral Medium 3.5 256k. **Bigger isn't always better** — beyond a length the LLM gets "Lost in the Middle".
 
 ### Prompt
 
@@ -376,7 +376,7 @@ The LLM "confidently asserts something false" — invents APIs, fabricates numbe
 
 ### Frontier Model
 
-The current top tier (**2026-06 (late)**: OpenAI GPT-5.6 (Sol / Terra / Luna, preview), Google Gemini 3.5 Flash, xAI Grok 4.3, Mistral Medium 3.5 (open weights, preview); **2026-06 (early)**: Claude Fable 5 (Mythos-class, above Opus) briefly shipped, but ⚠️ **a US export-control directive suspended all access on 2026-06-12 ([status](https://status.claude.com/) · [statement](https://www.anthropic.com/news/fable-mythos-access)); Fable 5 and Mythos 5 are currently unavailable**; **2026-05**: GPT-5.5, Claude Opus 4.8 (Opus-class flagship and the current top usable Claude tier), Gemini 3.1 Pro, DeepSeek-V4-Pro, etc.). Use frontier for hard reasoning; use cheap small models for simple classification / translation to save cost.
+The current top tier (**2026-06 (late)**: Claude Sonnet 5 (best speed-intelligence balance, close to Opus 4.8 but cheaper), OpenAI GPT-5.6 (Sol / Terra / Luna, preview), Google Gemini 3.5 Flash, xAI Grok 4.3, Mistral Medium 3.5 (open weights, preview); **2026-06 (early)**: Claude Fable 5 (Mythos-class, above Opus) briefly shipped, but ⚠️ **a US export-control directive suspended all access on 2026-06-12 ([status](https://status.claude.com/) · [statement](https://www.anthropic.com/news/fable-mythos-access)); Fable 5 and Mythos 5 are currently unavailable**; **2026-05**: GPT-5.5, Claude Opus 4.8 (Opus-class flagship and the current top usable Claude tier), Gemini 3.1 Pro, DeepSeek-V4-Pro, etc.). Use frontier for hard reasoning; use cheap small models for simple classification / translation to save cost.
 
 ### Context Engineering
 
@@ -407,7 +407,7 @@ The fourth discipline after prompt → context → harness engineering: designin
 
 ### Computer Use (screen-level agent)
 
-An agent operates real desktop apps via **screenshot → vision → coordinates → simulated mouse/keyboard** — no API needed, the agent uses the screen like a human. Representative: Anthropic Claude Computer Use (Opus 4.8 / Sonnet 4.6), OpenAI Codex desktop, Google Gemini in Chrome. **Anthropic public beta opened Oct 2024; OSWorld benchmark reached 76.26% (superhuman) by May 2026**.
+An agent operates real desktop apps via **screenshot → vision → coordinates → simulated mouse/keyboard** — no API needed, the agent uses the screen like a human. Representative: Anthropic Claude Computer Use (Opus 4.8 / Sonnet 5), OpenAI Codex desktop, Google Gemini in Chrome. **Anthropic public beta opened Oct 2024; OSWorld benchmark reached 76.26% (superhuman) by May 2026**.
 
 📍 Full coverage + 4-vendor comparison: [Stage 8 Computer Use](../stages/08-agent-interfaces.en.md)
 

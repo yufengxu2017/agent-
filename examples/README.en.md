@@ -124,7 +124,7 @@ Install: `ollama pull <model>` + `ollama serve`. Hardware tuning details: [resou
 |---|---|---|---|---|
 | `claude-fable-5` | $10 | $50 | — | Mythos-class; GA 2026-06-09. ⚠️ **Suspended 2026-06-12** (US export-control directive); currently unavailable, use Opus 4.8 |
 | **`claude-haiku-4-5`** ⭐ | $1 | $5 | 200k | Cheapest; fine for Stage 1-7 cloud-quality comparisons |
-| **`claude-sonnet-4-6`** ⭐ | $3 | $15 | 1M | **Production default**; Stage 5+ agent development |
+| **`claude-sonnet-5`** ⭐ | $3 | $15 | 1M | **Production default**; Stage 5+ agent development |
 | `claude-opus-4-8` | $5 | $25 | 1M | Opus-class flagship; complex reasoning / long-context refactors; current top usable tier |
 
 Subscription alternative: Claude Pro $20/month (includes Sonnet usage); Claude Max $100/month (includes Opus). Details: [resources/cli-agents-guide.en.md](../resources/cli-agents-guide.en.md).

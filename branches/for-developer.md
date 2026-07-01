@@ -89,7 +89,7 @@
 **2. Aider git-native 流程（最像「跟 AI pair」）**
 ```bash
 # 進入 repo 後
-aider --model anthropic/claude-sonnet-4-20250514
+aider --model anthropic/claude-sonnet-5
 
 # 自然語言請求
 > 幫我把 utils.py 的 parse_date 加上時區參數，預設 UTC
