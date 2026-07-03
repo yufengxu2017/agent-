@@ -251,6 +251,14 @@ PR process and style rules: [CONTRIBUTING.md](CONTRIBUTING.md) + [resources/styl
 
 ---
 
+## 💬 Advisory / Contact
+
+A free, open (MIT) learning edition — use it freely.
+
+Currently focused on advisory work: teams or companies needing **prompt review / audit** or **AI agent workflow consulting** are welcome to reach out (PhD student, limited availability): 📧 [wenyuchiou12@gmail.com](mailto:wenyuchiou12@gmail.com)
+
+---
+
 ## 🙏 Acknowledgments
 
 ### Inspiration

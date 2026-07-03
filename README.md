@@ -257,6 +257,14 @@ PR 流程跟 style 規範請看 [CONTRIBUTING.md](CONTRIBUTING.md) 跟 [resource
 
 ---
 
+## 💬 顧問 / 聯絡
+
+公開學習版（MIT），歡迎自由取用。
+
+目前以顧問為主：團隊或公司若需 **prompt review / audit** 或 **AI agent workflow 諮詢**，歡迎來信（博士生、時間有限）：📧 [wenyuchiou12@gmail.com](mailto:wenyuchiou12@gmail.com)
+
+---
+
 ## 🙏 致謝
 
 ### Inspiration
