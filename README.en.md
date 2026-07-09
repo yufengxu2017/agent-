@@ -307,7 +307,9 @@ If this learning roadmap helps your study or work, please cite:
 
 ## 📈 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=WenyuChiou/awesome-agentic-ai-zh&type=Date)](https://star-history.com/#WenyuChiou/awesome-agentic-ai-zh&Date)
+[![GitHub stars](https://img.shields.io/github/stars/WenyuChiou/awesome-agentic-ai-zh?style=social)](https://star-history.com/#WenyuChiou/awesome-agentic-ai-zh&Date)
+
+<sub>(GitHub tightened access to star-timeline data in 2026, so star-history's anonymous embedded chart no longer renders reliably; this uses a live star-count badge instead — click through for the star-history trend.)</sub>
 
 ---
 

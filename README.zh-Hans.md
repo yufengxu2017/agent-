@@ -341,7 +341,9 @@ PR 流程跟 style 规范请看 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [resource
 
 ## 📈 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=WenyuChiou/awesome-agentic-ai-zh&type=Date)](https://star-history.com/#WenyuChiou/awesome-agentic-ai-zh&Date)
+[![GitHub stars](https://img.shields.io/github/stars/WenyuChiou/awesome-agentic-ai-zh?style=social)](https://star-history.com/#WenyuChiou/awesome-agentic-ai-zh&Date)
+
+<sub>（GitHub 于 2026 收紧了“星标时间序列”数据的访问，star-history 的匿名内嵌图已无法稳定显示；改用实时星数徽章，点击可前往 star-history 趋势页。）</sub>
 
 ---
 
