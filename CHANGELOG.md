@@ -6,6 +6,10 @@ Format: `YYYY-MM-DD · category · 1-line summary (commit-sha)`.
 
 ---
 
+## 2026-07-12
+
+- **content** · Stage 2 Exercise 2 (Few-Shot) now makes a **fair** zero-shot vs few-shot comparison (resolves #62, reported by @WMichstaBe). The zero-shot baseline had no task instruction (just `input: {text}\noutput:`), which conflated "telling the model the task" with "showing examples" — small models often read it as text continuation and scored ~0, overstating the few-shot gain. Both conditions now share the same `TASK` instruction and few-shot only *adds* examples, so the experiment isolates the effect of the examples. The fragile `assert c3 >= c0` (few-shot isn't guaranteed to beat zero-shot) was replaced with a completeness check plus an honest "net gain may be 0 or even negative" printout; the observation prose was reframed to few-shot's real value (pinning output format + judgment on ambiguous cases). Path A + Path B, tri-locale; example code AST-parses clean; gates + code-reviewer pass.
+
 ## 2026-07-09
 
 - **content** · Stage 7.5 gains a plain-language **"分工 / Division of labor"** subsection (tri-locale), sourced first-party from Anthropic's *Agentic coding and persistent returns to expertise* (2026-06-16) + the *2026 Agentic Coding Trends Report*: you decide **what** to build, the agent decides **how** (~70% of planning decisions are the human's; ~80% of execution is left to the agent). Ties into the stage's "work boundary" axis, the returns-to-expertise framing, and the human → agent-team extension (Stage 7). Written analogy-first (home-renovation) for non-engineers; every cited number is first-party-verified — the trends-report "delegation gap" figures were NOT first-party-confirmable, so deliberately omitted. Tri-locale; anchor / zh-Hans / switcher gates + code-reviewer pass.
